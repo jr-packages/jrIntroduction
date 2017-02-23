@@ -1,0 +1,132 @@
+## Getting Started
+
+It's a good idea to start a new R Studio project for this course. This will keep all of this work separate from any other projects you might undertake in the future and will help to keep your work nicely organised.^[RStudio allows you to quickly and easily switch between different projects so you can keep each piece of work in it's own project.]
+
+To start a new project go to
+
+```
+  File -> New Project
+```
+
+At the pop up options I would recommend choosing
+
+```
+  New Directory -> Empty Project
+```
+
+and then choose a name and a place to save your new project.
+
+You can find further information on using RStudio projects at their website http://www.rstudio.com/ide/docs/using/projects ^[RStudio has lots of useful documentation for lots of different topics and is a continuing useful resource as yor experience grows.]
+
+### Start a new script file
+
+If a new empty R script file does not open automatically when you create your project you can open a new one^[Alternatively use `ctrl + shft + n` to launch a new R script]
+
+```
+   File -> New File -> Rscript
+```
+
+Make sure that you choose the correct type of file. The RStudio IDE is clever in the way that it treats file extensions. Choosing a R script file will make sure that when you come to save your script it is saved as the correct type. It is also necessary to allow us to easily send R code from the text editor to be evaluated in the R terminal.
+
+### Sending your first code
+
+Let's start with sending our first piece of code to be evaluated. In the script editor (likely the top left window) write a simple piece of code, say
+
+```{r, echo = TRUE}
+x = 5
+```
+
+To send this code from the editor to be run by R you have a few options:
+
+1. If the cursor is on the same line as the code you can either^[Both of these will only run the one line of code.]
+    + Click `Run` at the top left of th e editor window
+    + Press `ctrl + enter`
+2. Highlight the code that you would like to run and follow the options in 1.
+3. `ctrl + shft + s` sends all code from the editor to be evaluated.
+
+`r margin_note("I tend to prefer using 'ctrl + enter' as I like using keyboard shortcuts. If you want to see all available keyboard shortcuts either go to Help and choose keyboard shortcuts, alternatively 'Alt + shft + k' is the keyboard shortcut for the keyboard shortcut menu.")`
+
+## Course R package
+
+Make sure that you have the course package loaded into the current session. Instructions on how to install the package are contained in the appendix to the course notes. You should only need to install a package once using `install.packages()` and then we need to use `library()` in every session or script that we want to use the functionality of that package.
+
+```{r, echo=TRUE}
+library(jrIntroduction)
+```
+
+
+## Vectors
+
+Write the following code in the editor and run it
+
+```{r, echo = TRUE}
+x1 = GetNumericVector()
+```
+
+This code generates a large vector of random numbers such that everyone has the same.^[This function is part of the course package `jrIntroduction`, you can view it's help page if you like `r knitr::inline_expr('?GetNumericVector()')`]
+
+1. How many elements are in `x1`? (i.e What's is the length of `x1`)
+  
+  ```{r}
+  length(x1)
+  ```
+
+2. What is the 55^th^ element of `x1`?
+
+  ```{r}
+  x1[55]
+  ```
+
+3. What is the final value in `x1`?
+
+  ```{r}
+  x1[length(x1)]
+  ```
+  
+4. What is the mean value of `x1`?
+
+  ```{r}
+  mean(x1)
+  ```
+
+5. What is the smallest vaule of `x1`?
+
+  ```{r}
+  min(x1)
+  ```
+  
+6. What is the 50^th^ smallest value of `x1`?
+
+## Reading and Writing data
+
+This section is inteded to make sure you feel happy reading and writing data into and out of R respectively.
+
+First, load the movies data from the package
+
+```{r, echo = TRUE}
+data(movies, package = "jrIntroduction")
+```
+
+We can write this data to a file using the `write_csv()` function from the `readr` package. To use the `readr` package we must ensure that it is in use in for our current session.
+
+```{r, echo = TRUE}
+library(readr)
+```
+
+If this generates an error saying "there is no package called 'readr'" it means that the package is not already installed on your system. No problem though, we know how to install packages now
+
+```{r, echo = TRUE, eval = FALSE}
+install.packages("readr")
+library(readr)
+```
+
+fixes the problem.
+
+1. Write the contents of the movies data frame out to a file, you can call this file whatever you like. Once you have done so verify that it is there by using your file browser to locate it. **Don't forget the .csv file extension**^[Strictly the file extension is not needed, it is just a mechanism your computer uses to determine what program should open a certain file. It is however good practice to include the file extensions.]
+
+  ```{r, eval = FALSE}
+  write_csv(movies, "jumpingrivers.csv")
+  ```
+
+
+## Data frames
