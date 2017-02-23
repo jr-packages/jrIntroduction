@@ -148,7 +148,7 @@ fixes the problem.
     write_csv(movies, "jumpingrivers.csv")
     ```
 
-  (1) Make sure that you can read the data back in
+  (1) Make sure that you can read the data back in, when you do assign it to a variable called `d`
     ```{r, eval = FALSE}
     read_csv("jumpingrivers.csv")
     ```
@@ -158,7 +158,7 @@ fixes the problem.
     GetExcelMovies()
     ```
     (a) If you have succesfully copied the file, open it using Excel.
-    (b) You should be able to save this spreadsheet as a csv by either
+    (a) You should be able to save this spreadsheet as a csv by either
     ```
       File -> Save As
     ```
@@ -167,5 +167,23 @@ fixes the problem.
       File -> Export
     ```
     export as csv depending on which version of Excel you are running.
-     
-## Data frames
+    (a) Once you have done this make sure that you can then read it in using `read_csv()`
+
+## Data frames and tibbles
+
+For this section we will be using some of the functions from the `dplyr` package. Since we are starting to use more of the packages that are included in the "tidyverse" it makes sense to just install them all now.
+
+```{r, echo=TRUE, eval = FALSE}
+install.packages("tidyverse") # install once
+library("tidyverse") # library each time we want to use them
+```
+
+You should already have the `movies` data frame loaded from the package. You should also have another copy of that data called `d` from the reading and writing exercises. You should be able to see that they are in the session under the environment tab (as well as any other variables you have defined in the session).
+
+You could print out the data to inspect it by typing its variable name^[You could also use `View(movies)` which will open it in the editor with similar formatting to a spread sheet. This is not editable however.]
+
+```{r, echo = TRUE}
+movies
+```
+
+When we read data in using the `read_csv()` function we get a tibble version of that data frame
