@@ -6,6 +6,7 @@ globalVariables("movies")
 #' The seed argument resets the random number generator.
 #' @param seed A positive interger for the random number generator. Default 1.
 #' @return A data frame with a random numer of rows
+#' @importFrom utils data
 #' @export
 #' @examples
 #' d1 = GetDataFrame()

@@ -4,6 +4,8 @@
 #' Given a seed, the functions will always return the
 #' same subset.
 #' @inheritParams GetDataFrame
+#' @importFrom stats runif
+#' @importFrom stats rnorm
 #' @export
 GetNumericVector = function(seed=1){
   set.seed(seed)
