@@ -11,6 +11,7 @@ opts_chunk$set(fig.path='figure/graphics-',
                dev='pdf', fig.width=5, fig.height=5, 
                fig.show='hold', cache=FALSE, par=TRUE)
 knit_hooks$set(crop=hook_pdfcrop)
+suppressPackageStartupMessages(library(tidyverse))
 ```
 
 
@@ -150,15 +151,15 @@ fixes the problem.
 
   (1) Make sure that you can read the data back in, when you do assign it to a variable called `d`
     ```{r, eval = FALSE}
-    read_csv("jumpingrivers.csv")
+    d = read_csv("jumpingrivers.csv")
     ```
 
   (1) The package also contains an Excel version of the movies data. The motivation behind this question is that in the past a number of participants have been interested in how to export their data from an excel file they already have and import it into R. Running the code below should copy the excel file to your current working directory.^[The working directory is the default directory for reading and writing files from R. You can see what it is using `getwd()` and change it using `setwd()` passing a new directory path as an argument. Alternatively go to the Session tab of RStudio to change it.]
     ```{r, echo = TRUE, eval = FALSE}
     GetExcelMovies()
     ```
-    (a) If you have succesfully copied the file, open it using Excel.
-    (a) You should be able to save this spreadsheet as a csv by either
+  (a) If you have succesfully copied the file, open it using Excel.
+  (a) You should be able to save this spreadsheet as a csv by either
     ```
       File -> Save As
     ```
@@ -167,9 +168,13 @@ fixes the problem.
       File -> Export
     ```
     export as csv depending on which version of Excel you are running.
-    (a) Once you have done this make sure that you can then read it in using `read_csv()`
+  (a) Once you have done this make sure that you can then read it in using `read_csv()`
 
 ## Data frames and tibbles
+
+```{r, echo = FALSE}
+d = as_tibble(movies)
+```
 
 For this section we will be using some of the functions from the `dplyr` package. Since we are starting to use more of the packages that are included in the "tidyverse" it makes sense to just install them all now.
 
@@ -182,8 +187,85 @@ You should already have the `movies` data frame loaded from the package. You sho
 
 You could print out the data to inspect it by typing its variable name^[You could also use `View(movies)` which will open it in the editor with similar formatting to a spread sheet. This is not editable however.]
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, eval = FALSE}
 movies
 ```
 
-When we read data in using the `read_csv()` function we get a tibble version of that data frame
+(1) When we read data in using the `read_csv()` function we get a tibble version of that data frame. What is the difference if you print out the contents of `d`?
+
+    ```{r}
+    ## d has a much tidier print method, showing the top few rows and the types of data in each column. 
+    ## It keeps everything on screen
+    ```
+
+(1) Likewise we can observe the differences between the data frame `movies` and the tibble `d` when we try to pull out an individual column. Try pulling out the `Year` column using both the `$Year` notation and the `[,2]` notation. What are the differences between `movies` and `d` for these two operations?
+
+    ```{r, eval = FALSE}
+    movies$Year
+    d$Year
+    
+    ## give the same thing, a vector
+    ```
+
+    ```{r, eval = FALSE}
+    movies[,2]
+    d[,2]
+    
+    ## with the tibble we get back another tibble, (2 dimensional)
+    ## with the data frame we get a vector (1 dimensional)
+    ```
+
+(1) Using `mean()` and `median()` calculate these summary statistics for the film lengths
+
+    ```{r}
+    # either
+    mean(movies$Length)
+    median(movies$Length)
+    # or
+    summarise(movies, mean(Length), median(Length))
+    # Either is fine, but from now on in the solutions I will use the dplyr option with the tibble d
+    ```
+    
+(1) How many Action films are there in the data? (There is a 1 in the action column if it is an action film)
+
+    ```{r}
+    count(d,Action)
+    ```
+
+(1) You can use both `count()` and `table()` on more than one column at once by just adding extra columns as arguments. For example `count(d,mpaa,Action)` would tell me how many action and non action films there are for each of the mpaa ratings. How many romantic comedy films are there? i.e a 1 in the Romance column and a 1 in the Comedy column?
+
+    ```{r}
+    count(d,Romance,Comedy)
+    ```
+
+(1) What year is the oldest film in the data set from?
+
+    ```{r}
+    summarise(d,min(Year))
+    ```
+
+(1) How long is the longest film?
+
+    ```{r}
+    summarise(d,max(Length))
+    ```
+
+(1) What is the standard deviation of the film ratings?
+
+    ```{r}
+    summarise(d, sd(Rating))
+    ```
+
+(1) How many people cast their vote on a film on average?
+
+    ```{r}
+    summarise(d,mean(Votes))
+    ```
+
+## Solutions
+
+Solutions to the practical questions are contained within in the package
+
+```{r, eval= FALSE, echo = TRUE}
+vignette("solutions1", package = "jrIntroduction")
+```
