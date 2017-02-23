@@ -1,0 +1,36 @@
+```{r, include = FALSE, cache = FALSE}
+library(knitr)
+# opts_knit$set(out.format = "latex")
+knit_theme$set(knit_theme$get("greyscale0"))
+
+options(replace.assign=FALSE,width=50)
+
+opts_chunk$set(fig.path='figure/graphics-', 
+               cache.path='cache/graphics-', 
+               fig.align='center', 
+               dev='pdf', fig.width=5, fig.height=5, 
+               fig.show='hold', cache=FALSE, par=TRUE)
+knit_hooks$set(crop=hook_pdfcrop)
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+## A suggestion
+
+This is just a suggestion to try and help get you into "good habits" early. If I was sitting to take this practical now, I would start a new script within the same Rstudio project that you should have created as part of the first practical. That way all of the work that you have done associated with todays course is in one place, and each the code for each of the practicals is separate from one another. This might feel a bit tedious right now, but as the amount of code you write and number of projects you take part in increases it will pay off to have a structured workflow. 
+
+## Base Graphics
+
+We will continue to investigate the movies data from earlier. Make sure that you have the data loaded into the session as part of your new script (if you started one).
+
+```{r, echo = TRUE, eval = TRUE}
+data(movies, package = "jrIntroduction")
+```
+
+### Scatter plots
+
+Let's start with a basic scatter plot of the movie ratings against their lengths to generate something like Figure 1.
+
+```{r fig.margin = TRUE, fig.cap="A basic scatter plot.", echo = TRUE, fig.keep='all'}
+plot(movies$Length, movies$Rating)
+```
+

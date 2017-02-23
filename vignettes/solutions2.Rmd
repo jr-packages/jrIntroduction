@@ -1,0 +1,21 @@
+---
+title: "Solutions 2"
+author: "Jumping Rivers"
+output: #rmarkdown::html_vignette
+  tufte::tufte_html:
+    highlight: tango
+vignette: >
+  %\VignetteIndexEntry{Solutions 2}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+
+```{r include = FALSE}
+library(tufte)
+# knitr::opts_chunk$set(results = "hide", echo = FALSE)
+```
+
+
+```{r child = 'practical2_contents.Rmd'}
+```

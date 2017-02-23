@@ -262,6 +262,12 @@ movies
     summarise(d,mean(Votes))
     ```
 
+## Do you understand your own script
+
+Look over the script file that contains all of the code that you have written to answer the questions in this practical session. Do you feel confident that you could look on this in a months time and know exactly what is going on in your code? Does your code have an order to it or are commands written in a disorganised fashion. Are there any syntax errors in any of the code that is in your script? Could I copy and paste your script and run it through to completion with no issues on my laptop? If you feel like your script could improve in any of these areas, go back and tidy it up. Write comments alongside bits of code describing why you have done what you have done if it's not obvious at first glance. Get rid of all the syntax errors and make sure that if you were to run all your code at once from top to bottom, you would still get all the correct answers and there would be no errors.^[A quick acid test for this is to run `rm(list = ls())` to delete all stored variables, then `ctrl + shft + F10` to restart the R session, followed by `ctrl + shft + s` to run all the code.]
+
+I appreciate that this might sound a little pedantic but getting into the habit of doing this sort of thing now will make your life much more pleasant in the long run. If you naturally write your code like that already, great, I wish I could be more like you. I wish I had got into this sort of habit much earlier.
+
 ## Solutions
 
 Solutions to the practical questions are contained within in the package
