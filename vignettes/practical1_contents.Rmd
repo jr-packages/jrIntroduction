@@ -33,7 +33,7 @@ At the pop up options I would recommend choosing
 
 and then choose a name and a place to save your new project.
 
-You can find further information on using RStudio projects at their website http://www.rstudio.com/ide/docs/using/projects ^[RStudio has lots of useful documentation for lots of different topics and is a continuing useful resource as yor experience grows.]
+You can find further information on using RStudio projects at their website http://www.rstudio.com/ide/docs/using/projects ^[RStudio has lots of useful documentation for lots of different topics and is a continuing useful resource as your experience grows.]
 
 ### Start a new script file
 
@@ -56,7 +56,7 @@ x = 5
 To send this code from the editor to be run by R you have a few options:
 
 1. If the cursor is on the same line as the code you can either^[Both of these will only run the one line of code.]
-    + Click `Run` at the top left of th e editor window
+    + Click `Run` at the top left of the editor window
     + Press `ctrl + enter`
 2. Highlight the code that you would like to run and follow the options in 1.
 3. `ctrl + shft + s` sends all code from the editor to be evaluated.
@@ -106,7 +106,7 @@ This code generates a large vector of random numbers such that everyone has the 
     mean(x1)
     ```
 
-  (1) What is the smallest vaule of `x1`?
+  (1) What is the smallest value of `x1`?
 
     ```{r}
     min(x1)
@@ -121,7 +121,7 @@ This code generates a large vector of random numbers such that everyone has the 
 
 ## Reading and Writing data
 
-This section is inteded to make sure you feel happy reading and writing data into and out of R respectively.
+This section is intended to make sure you feel happy reading and writing data into and out of R respectively.
 
 First, load the movies data from the package
 
@@ -158,12 +158,12 @@ fixes the problem.
     ```{r, echo = TRUE, eval = FALSE}
     GetExcelMovies()
     ```
-  (a) If you have succesfully copied the file, open it using Excel.
+  (a) If you have successfully copied the file, open it using Excel.
   (a) You should be able to save this spreadsheet as a csv by either
     ```
       File -> Save As
     ```
-    and choosing .csv (Comma Seperated Value) as the file type or
+    and choosing .csv (Comma Separated Value) as the file type or
     ```
       File -> Export
     ```

@@ -34,7 +34,7 @@ fig <- local({
 
 ## A suggestion
 
-This is just a suggestion to try and help get you into "good habits" early. If I was sitting to take this practical now, I would start a new script within the same Rstudio project that you should have created as part of the first practical. That way all of the work that you have done associated with todays course is in one place, and each the code for each of the practicals is separate from one another. This might feel a bit tedious right now, but as the amount of code you write and number of projects you take part in increases it will pay off to have a structured workflow. 
+This is just a suggestion to try and help get you into "good habits" early. If I was sitting to take this practical now, I would start a new script within the same RStudio project that you should have created as part of the first practical. That way all of the work that you have done associated with today's course is in one place, and the code for each of the practicals is separate from one another. This might feel a bit tedious right now, but as the amount of code you write and number of projects you take part in increases it will pay off to have a structured workflow. 
 
 ## Base Graphics
 
@@ -57,7 +57,7 @@ plot(movies$Length, movies$Rating)
 
 Whilst this can be informative at the data exploration stage, it isn't very aesthetically pleasing. First off the default axis labels are not very good.
 
-(1) Use the `xlab` and `ylab` arguments^[Arguments are the things we pass to our function inside the `()` to control the behavious of that function.] to the plot function to change the axis labels to something more sensible
+(1) Use the `xlab` and `ylab` arguments^[Arguments are the things we pass to our function inside the `()` to control the behavior of that function.] to the plot function to change the axis labels to something more sensible
 
     ```{r, eval = FALSE}
     plot(movies$Length, movies$Rating,
@@ -110,7 +110,7 @@ Whilst this can be informative at the data exploration stage, it isn't very aest
          xlab = "Length", ylab = "Rating",
          ylim = c(0,10), pch = 19,
          col = movies$Comedy + 1,#
-         main = "Ratings and against Lengths for Comedy films") # 2 is red
+         main = "Ratings against Lengths for Comedy films") # 2 is red
     ```
 
 (1) We saw in the notes how to create a bar chart from some categorical data by using a combination of the `table()` function and the `barplot()` function. We are going to do similar here to create a bar chart that looks at the distribution of the mpaa rating of films for both comedies and non comedies. First use `table()` on both the Comedy and mpaa variables of the movies data frame and assign your result to a variable. 
@@ -150,13 +150,13 @@ Whilst this can be informative at the data exploration stage, it isn't very aest
 
 We should now have two plots that look like those in Figure 2. <!--- `r fig$ref("double")`. --->
 
-```{r, fig.fullwidth = TRUE, fig.cap = fig$cap("double","A scatter plot and bar chart as a target for these exercises."), fig.width=9, fig.height=3}
+```{r, fig.fullwidth = TRUE, fig.cap = fig$cap("double","A scatter plot and bar chart as a target for these exercises."), fig.width=9, fig.height=3, echo = FALSE}
 op = par(mfrow = c(1,2), mar = c(3,3,3,1))
  plot(movies$Length, movies$Rating,
          xlab = "Length", ylab = "Rating",
          ylim = c(0,10), pch = 19,
          col = movies$Comedy + 1,#
-         main = "Ratings and against Lengths for Comedy films") # 2 is red
+         main = "Ratings against Lengths for Comedy films") # 2 is red
 barplot(tab, beside = TRUE, col = 1:2,
             xlab = "MPAA Ratings", ylab = "Frequency",
             main = "Comedy films in red")
@@ -166,9 +166,15 @@ par(op)
 
 ## Data manipulation 
 
-This section will hopefully help you get more comfortable with some of the `dplyr` functionality for "wrangling" your data. We will do some data wrangling and the use that to add to our two plots so far.
+This section will hopefully help you get more comfortable with some of the `dplyr` functionality for "wrangling" your data. We will do some data wrangling and the use that to add to our two plots so far. Make sure you load in the `dplyr` package or just load all `tidyverse` packages at once.
 
-(1) We want to look at how film budgets have changed over time for both the Comedy and non Comedy films. To start with, since the `-1` ecoding for films where we didn't know the budget is would distort any estimates of average we will remove these. Use the `filter()` function to remove them, try using the `%>%` operator notation if you like, `movies %>% filter(...)`
+```{r, echo = 2, eval = 2}
+suppressPackageStartupMessages(library(tidyverse))
+library(tidyverse)
+```
+
+
+(1) We want to look at how film budgets have changed over time for both the Comedy and non Comedy films. To start with, since the `-1` encoding for films where we didn't know the budget is would distort any estimates of average we will remove these. Use the `filter()` function to remove them, try using the `%>%` operator notation if you like, `movies %>% filter(...)`
 
     ```{r, eval = FALSE}
     movies %>%
@@ -178,9 +184,112 @@ This section will hopefully help you get more comfortable with some of the `dply
 
 (1) We want to look at comedy and non comedy films in each year, this is some sort of grouping structure which suggests use of the `group_by()` function. Create this grouping structure on the filtered movies data
 
-    ```{r}
+    ```{r, eval = FALSE}
     movies %>% 
       filter(Budget != -1) %>%
       group_by(Year,Comedy)
     ```
+
+(1) Use `summarise()` to calculate the average budget in each year for both comedy and non comedy films. When you do name the new column of averages `b` and store the final output data as a variable called `plotdat`
+
+    ```{r}
+    plotdat = movies %>% 
+      filter(Budget != -1) %>%
+      group_by(Year,Comedy) %>%
+      summarise(b = mean(Budget))
+    ```
+
+(1) We could now create a line plot for the non comedy movies using^[Here we are using the formula notation for plots, refer back to the plotting section of the notes if you are unsure.]
+
+```{r, echo=FALSE, eval = TRUE}
+non_comedy = plotdat %>% 
+      filter(Comedy == 0)
+```
+
+
+    ```{r, echo = TRUE, eval = FALSE}
+    non_comedy = plotdat %>% 
+      filter(Comedy == 0)
+    plot(b~Year, data = non_comedy, type = "l", 
+         ylab = "Average Budget")
+    ```
+
+(1) Use `lines()` to add the corresponding line for the comedy films to be able to compare how the average budgets for each film type compares over time.
+
+```{r, eval = TRUE, echo = FALSE}
+comedy = plotdat %>% 
+      filter(Comedy == 1)
+```
+
+    ```{r, eval = FALSE}
+    comedy = plotdat %>% 
+      filter(Comedy == 1)
+    lines(b~Year, data = comedy, col = 2)
+    ```
+
+(1) Similarly create a data set which calculates the average rating for different film lengths for both comedy and non comedy films
+called `films`
+
+    ```{r}
+    films = movies %>%
+      group_by(Length,Comedy) %>%
+      summarise(r = mean(Rating))
+    ```
+
+(1) We could then plot the average rating against length for the non comedy films using the code below. In my data the average ratings column is called `r`
+
+```{r, eval=TRUE, echo = FALSE}
+non_films = films %>%
+           filter(Comedy == 0)
+```
+
+
+    ```{r, echo = TRUE, eval = FALSE}
+    non_films = films %>%
+           filter(Comedy == 0)
+    plot(r ~ Length, data = non_films, pch = 19,
+         ylab = "Average Rating")
+    ```
+
+(1) Add the points for the Comedy films in red using the `points()` function
+
+```{r, echo = FALSE}
+com_films = films %>% 
+      filter(Comedy == 1)
+```
+
+
+    ```{r, eval = FALSE}
+    com_films = films %>% 
+      filter(Comedy == 1)
+    points(r~Length, data = com_films, pch = 19, col = 2)
+    ```
+    
+(1) You should now have snippets of code which generate four graphics concerning different aspects of the film data. Our final task is to stick them all together and interpret them. We can use the `par()` function to control finer aspects of the plot. See `?par` for all of the possible options. By far my most common usage of `par()` is to allow multiple graphs on one plot window. To do so we need the `mfrow` argument. `par(mfrow = c(2,2), mar = c(2,2,2,1), mpg = c(2,0,0))` tells R that from this point onward you want to draw your graphs in a 2 by 2 formation. `mar` sets the margins around each plot and `mgp` sets the axis label margins. If we then run each of our plots again we should get them all together in one
+
+```{r, fig.fullwidth = TRUE, out.width='100%', fig.width = 8, fig.height = 8}
+par(mfrow = c(2,2), mar = c(3,3,3,2), mgp= c(2,0,0))
+# 1
+plot(movies$Length, movies$Rating,
+     xlab = "Length", ylab = "Rating",
+     ylim = c(0,10), pch = 19,
+     col = movies$Comedy + 1,#
+     main = "Ratings against Lengths for Comedy films") # 2 is red
+# 2
+barplot(tab, beside = TRUE, col = 1:2,
+        xlab = "MPAA Ratings", ylab = "Frequency",
+        main = "Comedy films in red")
+
+# 3
+plot(b~Year, data = non_comedy, type = "l", 
+     ylab = "Average Budget")
+lines(b~Year, data = comedy, col = 2)
+
+# 4 
+plot(r ~ Length, data = non_films, pch = 19,
+     ylab = "Average Rating")
+points(r~Length, data = com_films, pch = 19, col = 2)
+```
+
+
 
