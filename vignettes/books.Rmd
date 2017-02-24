@@ -1,0 +1,40 @@
+---
+title: "Recommended R text books"
+author: "Jumping Rivers"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{books}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+In recent years there has been an explosion of R books. However, many of these
+books try to teach R and statistics simultaneously. In the list below, I've
+tried to highlight books that only teach R programming.
+
+* A first course in statistical programming with R by Braun & Murdoch. £20
+    + Pros: I quite like this book (hence the reason I put it on my list). It
+    has a nice collection of exercises, it "looks nice"" and doesn't assume
+    knowledge of programming. It also doesn't assume (or try to teach) any
+    statistics.
+    + Cons: When describing `for()` loops and functions the examples aren't
+    very statistical. For example, it uses Fibonacci sequences in the while loop
+    section and the sieve of Eratosthenes for `if()` statements.
+* An introduction to R by Venables \& Smith. \pounds13
+    + Pros: Simple, short and to the point. Free copies available. Money from the book goes to the R project.
+    + Cons: More an R reference guide than a textbook.
+* A beginner's guide to R by Zuur. \pounds33
+    + Pros: Assumes no prior knowledge. Proceeds through concepts slowly and
+    carefully.
+    + Cons: Proceeds through concepts \emph{very} slowly and carefully.
+* R in a Nutshell by Adler. \pounds29
+    + Pros: An excellent reference. My current favourite R book.
+    + Cons: Only suitable for those with a previous (strong) computer
+    background.
+* Introduction to scientific programming and simulation using R by Jones,
+  Maillardet and Robinson. \pounds48
+    + Pros: A nice book that teaches R programming. Similar to the Braun \&
+    Murdoch book.
+    + Cons: A bit pricey.
