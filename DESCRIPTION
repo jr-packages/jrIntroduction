@@ -1,7 +1,7 @@
 Package: jrIntroduction
 Type: Package
 Title: Jumping Rivers: Introduction to R
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Jamie", "Owen",
      email="jamie@jumpingrivers.com", role = c("aut",
      "cre"))
@@ -12,8 +12,8 @@ License: GPL-3
 Depends:
     R (>= 3.1.0), 
 Imports:
-    ggplot2movies
+    ggplot2movies, tidyverse (>= 1.1.1)
 Suggests:
-    knitr, tufte, rmarkdown, tidyverse, readr
+    knitr, tufte, rmarkdown, readr
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
