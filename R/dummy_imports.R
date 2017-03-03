@@ -1,2 +1,2 @@
-#' @import tidyverse
+#' @import tidyverse readr
 NULL
