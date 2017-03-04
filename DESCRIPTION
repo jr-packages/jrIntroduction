@@ -11,7 +11,7 @@ License: GPL-3
 Depends:
     R (>= 3.1.0), 
 Imports:
-    ggplot2movies, tidyverse (>= 1.1.1), readr
+    ggplot2movies, tidyverse (>= 1.1.1), readr, readxl
 Suggests:
     knitr, tufte, rmarkdown
 VignetteBuilder: rmarkdown

@@ -71,7 +71,6 @@ Make sure that you have the course package loaded into the current session. Inst
 library("jrIntroduction")
 ```
 
-
 ## Vectors
 
 Write the following code in the editor and run it
@@ -113,8 +112,7 @@ This code generates a large vector of random numbers such that everyone has the 
     ```
   
   (1) What is the 50^th^ smallest value of `x1`?
-  
-  
+
     ```{r}
     sort(x1)[50]
     ```
@@ -129,7 +127,7 @@ First, load the movies data from the package
 data(movies, package = "ggplot2movies")
 ```
 
-We can write this data to a file using the `write_csv()` function from the `readr` package. To use the `readr` package we must ensure that it is in use in for our current session.
+We can write this data to a file using the `write_csv()` function from the `readr` package:
 
 ```{r, echo = TRUE}
 library("readr")
@@ -141,9 +139,9 @@ library("readr")
     write_csv(movies, "jumpingrivers.csv")
     ```
 
-  (1) Make sure that you can read the data back in, when you do assign it to a variable called `d`
+  (1) Make sure that you can read the data back in, when you do assign it to a variable called `movies`
     ```{r, eval = FALSE}
-    d = read_csv("jumpingrivers.csv")
+    movies = read_csv("jumpingrivers.csv")
     ```
 
   (1) The package also contains an Excel version of the movies data. The motivation behind this question is that in the past a number of participants have been interested in how to export their data from an excel file they already have and import it into R. Running the code below should copy the excel file to your current working directory.^[The working directory is the default directory for reading and writing files from R. You can see what it is using `getwd()` and change it using `setwd()` passing a new directory path as an argument. Alternatively go to the Session tab of RStudio to change it.]
@@ -159,13 +157,18 @@ library("readr")
     ```
       File -> Export
     ```
-    export as csv depending on which version of Excel you are running.
+    export as csv depending on which version of Excel you are running. Alternatively, you could
+    use
+    ```{r, eval=FALSE, echo=TRUE}
+    library(readxl)
+    movies = read_excel("movies.xlsx")
+    ```
   (a) Once you have done this make sure that you can then read it in using `read_csv()`
 
 ## Data frames and tibbles
 
 ```{r, echo = FALSE}
-d = as_tibble(movies)
+movies_t = as_tibble(movies)
 ```
 
 For this section we will be using some of the functions from the `dplyr` package. Since we are starting to use more of the packages that are included in the "tidyverse" it makes sense to load the package
@@ -174,33 +177,39 @@ For this section we will be using some of the functions from the `dplyr` package
 library("tidyverse") # library each time we want to use them
 ```
 
-You should already have the `movies` data frame loaded from the package. You should also have another copy of that data called `d` from the reading and writing exercises. You should be able to see that they are in the session under the environment tab (as well as any other variables you have defined in the session).
+You should already have the `movies` data frame loaded from the package. To
+understand the difference between data frames and tibbles, we remove the `tibble` tag
+and create another object
 
-You could print out the data to inspect it by typing its variable name^[You could also use `View(movies)` which will open it in the editor with similar formatting to a spread sheet. This is not editable however.]
-
-```{r, echo = TRUE, eval = FALSE}
-movies
+```{r}
+movies_d = as.data.frame(movies)
 ```
 
-(1) When we read data in using the `read_csv()` function we get a tibble version of that data frame. What is the difference if you print out the contents of `d`?
+You could print out the data to inspect it by typing its variable name, e.g
+```{r, results="hide"}
+movies
+movies_d
+```
+
+(1)  What is the difference if you print out the contents of `movies` and `movies_d`?
 
     ```{r}
-    ## d has a much tidier print method, showing the top few rows and the types of data in each column. 
+    ## movies has a much tidier print method, showing the top few rows and the types of data in each column. 
     ## It keeps everything on screen
     ```
 
-(1) Likewise we can observe the differences between the data frame `movies` and the tibble `d` when we try to pull out an individual column. Try pulling out the `Year` column using both the `$Year` notation and the `[,2]` notation. What are the differences between `movies` and `d` for these two operations?
+(1) Likewise we can observe the differences between the data frame `movies_d` and the tibble `movies` when we try to pull out an individual column. Try pulling out the `year` column using both the `$year` notation and the `[,2]` notation. What are the differences between `movies` and `movies_d` for these two operations?
 
     ```{r, eval = FALSE}
-    movies$Year
-    d$Year
+    movies$year
+    movies_d$year
     
     ## give the same thing, a vector
     ```
 
     ```{r, eval = FALSE}
     movies[,2]
-    d[,2]
+    movies_d[,2]
     
     ## with the tibble we get back another tibble, (2 dimensional)
     ## with the data frame we get a vector (1 dimensional)
@@ -210,47 +219,47 @@ movies
 
     ```{r}
     # either
-    mean(movies$Length)
-    median(movies$Length)
+    mean(movies$length)
+    median(movies$length)
     # or
-    summarise(movies, mean(Length), median(Length))
-    # Either is fine, but from now on in the solutions I will use the dplyr option with the tibble d
+    summarise(movies, mean(length), median(length))
+    # Either is fine, but from now on in the solutions I will use the dplyr option with the tibble movies
     ```
     
 (1) How many Action films are there in the data? (There is a 1 in the action column if it is an action film)
 
     ```{r}
-    count(d,Action)
+    count(movies, Action)
     ```
 
-(1) You can use both `count()` and `table()` on more than one column at once by just adding extra columns as arguments. For example `count(d,mpaa,Action)` would tell me how many action and non action films there are for each of the mpaa ratings. How many romantic comedy films are there? i.e a 1 in the Romance column and a 1 in the Comedy column?
+(1) You can use both `count()` and `table()` on more than one column at once by just adding extra columns as arguments. For example `count(movies, mpaa, Action)` would tell me how many action and non action films there are for each of the mpaa ratings. How many romantic comedy films are there? i.e a 1 in the Romance column and a 1 in the Comedy column?
 
     ```{r}
-    count(d,Romance,Comedy)
+    count(movies, Romance,Comedy)
     ```
 
 (1) What year is the oldest film in the data set from?
 
     ```{r}
-    summarise(d,min(Year))
+    summarise(movies, min(year))
     ```
 
 (1) How long is the longest film?
 
     ```{r}
-    summarise(d,max(Length))
+    summarise(movies, max(length))
     ```
 
 (1) What is the standard deviation of the film ratings?
 
     ```{r}
-    summarise(d, sd(Rating))
+    summarise(movies, sd(rating))
     ```
 
 (1) How many people cast their vote on a film on average?
 
     ```{r}
-    summarise(d,mean(Votes))
+    summarise(movies, mean(votes))
     ```
 
 ## Do you understand your own script
