@@ -1,7 +1,6 @@
 ---
 title: "Recommended R text books"
 author: "Jumping Rivers"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{books}
@@ -9,32 +8,40 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+### Introductory texts
 
-In recent years there has been an explosion of R books. However, many of these
-books try to teach R and statistics simultaneously. In the list below, I've
-tried to highlight books that only teach R programming.
-
-* A first course in statistical programming with R by Braun & Murdoch. £20
-    + Pros: I quite like this book (hence the reason I put it on my list). It
++ [Hands-On Programming with R](http://amzn.to/2lt6rzg) by Grolemund. £20.
+    + __Pros__: An excellent book. 
+* [R in a Nutshell](http://amzn.to/2mspZDu) by Adler. \pounds29
+    + __Pros__: An excellent reference. My current favourite R book.
+    + __Cons__: Only suitable for those with a previous (strong) computer
+    background.
+* [R for data science](http://amzn.to/2lLp50E) by Wickham & Grolemund. £20
+    + __Pros__: Clearly written, an excellent book.
+    + __Cons__: Well not advanced, it does assume a basic level of R programming.
+* A [first course in statistical programming](http://amzn.to/2n2gSpX) with R by Braun & Murdoch. £20
+    + __Pros__: I quite like this book (hence the reason I put it on my list). It
     has a nice collection of exercises, it "looks nice"" and doesn't assume
     knowledge of programming. It also doesn't assume (or try to teach) any
     statistics.
-    + Cons: When describing `for()` loops and functions the examples aren't
+    + __Cons__: When describing `for()` loops and functions the examples aren't
     very statistical. For example, it uses Fibonacci sequences in the while loop
     section and the sieve of Eratosthenes for `if()` statements.
-* An introduction to R by Venables \& Smith. \pounds13
-    + Pros: Simple, short and to the point. Free copies available. Money from the book goes to the R project.
-    + Cons: More an R reference guide than a textbook.
-* A beginner's guide to R by Zuur. \pounds33
-    + Pros: Assumes no prior knowledge. Proceeds through concepts slowly and
-    carefully.
-    + Cons: Proceeds through concepts \emph{very} slowly and carefully.
-* R in a Nutshell by Adler. \pounds29
-    + Pros: An excellent reference. My current favourite R book.
-    + Cons: Only suitable for those with a previous (strong) computer
-    background.
-* Introduction to scientific programming and simulation using R by Jones,
+* [An introduction to R](http://amzn.to/2lsRQnh) by Venables \& Smith. \pounds13
+    + __Pros__: Simple, short and to the point. Free copies available. Money from the book goes to the R project.
+    + __Cons__: More an R reference guide than a textbook.
+* [Introduction to scientific programming and simulation using R](http://amzn.to/2lsU8mG) by Jones,
   Maillardet and Robinson. \pounds48
-    + Pros: A nice book that teaches R programming. Similar to the Braun \&
+    + __Pros__: A nice book that teaches R programming. Similar to the Braun \&
     Murdoch book.
-    + Cons: A bit pricey.
+    + __Cons__: A bit pricey.
+    
+### Advanced programing
+
+  * [Efficient R programming](http://amzn.to/2m8sYi1) by Gillespie & Lovelave. £20.
+    + __Pros__: Takes the viewpoint of a non-programmer coming to the world of R.
+    + __Cons__: Since one of our consultants wrote the book, we're slightly biased ;)
+    
+  * [Advanced R programming](http://amzn.to/2n2xBJD) Wickham. £35
+    + __Pros__: A must for all advanced programmers.
+    + __Cons__: Not a downside, but focuses on the notes and bolts of the language.
