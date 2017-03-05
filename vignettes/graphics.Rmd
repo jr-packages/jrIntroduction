@@ -7,7 +7,7 @@ vignette: >
   %\VignetteIndexEntry{graphics}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  ---
+---
   
 If you just want to save one or two graphics from an analysis that you are running in an interactive session it is often suitable to just use the **export** button in the RStudio IDE. However it is possible to save graphics using code. This would be particularly useful if you were running a script that generated lots of graphics, or perhaps you wanted some sort of automated appproach to generating graphics.
   
