@@ -157,13 +157,13 @@ library("readr")
     ```
       File -> Export
     ```
-    export as csv depending on which version of Excel you are running. Alternatively, you could
-    use
+    export as csv depending on which version of Excel you are running. 
+  (a) Once you have done this make sure that you can then read it in using `read_csv()`
+  Alternatively, you could try
     ```{r, eval=FALSE, echo=TRUE}
     library(readxl)
     movies = read_excel("movies.xlsx")
     ```
-  (a) Once you have done this make sure that you can then read it in using `read_csv()`
 
 ## Data frames and tibbles
 
@@ -181,7 +181,7 @@ You should already have the `movies` data frame loaded from the package. To
 understand the difference between data frames and tibbles, we remove the `tibble` tag
 and create another object
 
-```{r}
+```{r, echo = TRUE}
 movies_d = as.data.frame(movies)
 ```
 

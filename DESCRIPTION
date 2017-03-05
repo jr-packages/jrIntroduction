@@ -14,5 +14,5 @@ Imports:
     ggplot2movies, tidyverse (>= 1.1.1), readr, readxl
 Suggests:
     knitr, tufte, rmarkdown
-VignetteBuilder: rmarkdown
+VignetteBuilder: knitr
 RoxygenNote: 6.0.1

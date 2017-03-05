@@ -1,0 +1,99 @@
+---
+title: "Saving graphics using code"
+author: "Jumping Rivers"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{graphics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  ---
+  
+If you just want to save one or two graphics from an analysis that you are running in an interactive session it is often suitable to just use the **export** button in the RStudio IDE. However it is possible to save graphics using code. This would be particularly useful if you were running a script that generated lots of graphics, or perhaps you wanted some sort of automated appproach to generating graphics.
+  
+## Image types
+  
+There are a number of image formats that R can save it's graphics to. Typically the type of image file that you would use depends on the type of graphic that you are drawing, in some cases it might also depend on the type of document you are going to put your graphic into. Some versions of Microsoft Word for example do not allow you to put pdf images into a word document. 
+  
+Typically you would use a vector format image file for graphs that are mainly composed of straight lines. A vector format is something like a `.pdf` file or `.eps`. These sorts of file types are less suitable to images that require high resolutions, things like maps or contour plots, or scatter plots with lots of points for example. 
+  
+A raster format image type is much more suitable to these kinds of plots. Examples of raster image formats are things like `.jpg`, `.png` or `.gif`.
+  
+## Saving as a PDF
+  
+The portable document format (PDF) is a vector file format. For many types of
+graphics, vector files are preferred for print. This is because the resulting
+output can be scaled to any size without pixelation. The size of the pdf is
+usually smaller than a corresponding raster (bitmap) file, except, when we are plotting
+hundreds of thousands of objects. For example, a scatter plot with $10^6$
+points. Each point is represented by a single vector. To save a plot as a pdf,
+we use the `pdf()` function. The function `dev.off()` closes the
+current *device*. In this case, we are using a pdf device. If you had a
+standard plot window open, `dev.off()` would close that window.
+
+```{r, eval = FALSE}
+pdf("mygraph.pdf")
+plot(1:10)
+dev.off()
+```
+
+By default, pdfs are 7 * 7 inches. When including graphs in
+papers or reports, I tend to reduce the size of the pdf.
+
+```{r, eval = FALSE}
+## 6 by 6 inches
+pdf("mygraph.pdf", width=6, height=6)
+plot(1:10)
+dev.off()
+```
+
+Another
+standard vector format is postscript. Just use the `ps()` function instead of
+the `pdf()` function to generate postscript files.
+
+## Raster or bitmap formats
+
+JPEG, PNG and TIFF are bitmap (or raster) formats. Typically, I only
+use raster plots for scatter plots with millions of points or (perhaps)
+heatmap type plots or geographic maps and contours. When we magnify these formats, the pixels will eventually
+become visible. When you take pictures with a digital camera the images are
+stored using a bitmap format, because a vector representation of the image would
+be too large. To store a graph in a bitmap format, we use the `png()`,
+`jpeg()` or `tiff()` functions:
+
+```{r, eval = FALSE}
+png("mygraph.png")
+plot(1:10)
+dev.off()
+```
+
+By default, the graphs are  480 * 480 pixels in size and have a
+resolution of 72 dpi. (dpi = dots per inch.) Obviously, increasingly
+the resolution will increase image quality, but at a cost of file size. You can
+alter the resolution using the `res` argument in `png()`.
+
+## Working with word
+
+Some programs - Microsoft Office - cannot import PDF files, so we are forced to
+work with high-resolution PNG or TIFF files. If you have a graph for
+a publication, then you can typically you upload the file separately. In this
+case, use pdf or postscript format. A reasonable print quality is around 300
+dpi. So to make a 6 * 6 inch image, we use the command
+
+```{r, eval = FALSE}
+ppi = 300
+png("mygraph.png", width=6*ppi, height=6*ppi, res=ppi)
+plot(1:10)
+dev.off()
+```
+
+For displaying the graphic on a screen, a dpi of around 150 is
+usually fine.
+
+## Saving a graphic from the screen
+
+If you have generated a graph using the `plot()` command, say, then you can
+save the graphic to a file using the `dev.copy()` command. This will save the
+current graph from the screen, but it re-renders it for the particular device.
+Hence, it may not look exactly the same unless you specify the *exact*
+same size in pixels.
