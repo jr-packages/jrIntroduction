@@ -2,7 +2,7 @@
 title: "Practical 2"
 author: "Jumping Rivers"
 output: #rmarkdown::html_vignette
-  tufte::tufte_html:
+  tufte::tufte_handout:
     highlight: tango
     fig_width: 4
     fig_height: 4

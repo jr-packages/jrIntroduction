@@ -36,7 +36,7 @@ fig <- local({
 
 This is just a suggestion to try and help get you into "good habits" early. If I was sitting to take this practical now, I would start a new script within the same RStudio project that you should have created as part of the first practical. That way all of the work that you have done associated with today's course is in one place, and the code for each of the practicals is separate from one another. This might feel a bit tedious right now, but as the amount of code you write and number of projects you take part in increases it will pay off to have a structured workflow. 
 
-## Base Graphics
+# Base Graphics
 
 We will continue to investigate the movies data from earlier. Make sure that you have the data loaded into the session as part of your new script (if you started one).
 
@@ -44,7 +44,7 @@ We will continue to investigate the movies data from earlier. Make sure that you
 data(movies, package = "jrIntroduction")
 ```
 
-### Scatter plots
+## Scatter plots
 
 Let's start with a basic scatter plot of the movie ratings against their lengths to generate something like 
 figure 1.
@@ -164,7 +164,7 @@ par(op)
 ```
 
 
-## Data manipulation 
+# Data manipulation 
 
 This section will hopefully help you get more comfortable with some of the `dplyr` functionality for "wrangling" your data. We will do some data wrangling and the use that to add to our two plots so far. Make sure you load in the `dplyr` package or just load all `tidyverse` packages at once.
 

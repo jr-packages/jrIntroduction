@@ -15,7 +15,7 @@ suppressPackageStartupMessages(library(tidyverse))
 ```
 
 
-## Getting Started
+# Getting Started
 
 It's a good idea to start a new R Studio project for this course. This will keep all of this work separate from any other projects you might undertake in the future and will help to keep your work nicely organised.^[RStudio allows you to quickly and easily switch between different projects so you can keep each piece of work in it's own project.]
 
@@ -35,7 +35,7 @@ and then choose a name and a place to save your new project.
 
 You can find further information on using RStudio projects at their website http://www.rstudio.com/ide/docs/using/projects ^[RStudio has lots of useful documentation for lots of different topics and is a continuing useful resource as your experience grows.]
 
-### Start a new script file
+## Start a new script file
 
 If a new empty R script file does not open automatically when you create your project you can open a new one^[Alternatively use `ctrl + shft + n` to launch a new R script]
 
@@ -45,7 +45,7 @@ If a new empty R script file does not open automatically when you create your pr
 
 Make sure that you choose the correct type of file. The RStudio IDE is clever in the way that it treats file extensions. Choosing a R script file will make sure that when you come to save your script it is saved as the correct type. It is also necessary to allow us to easily send R code from the text editor to be evaluated in the R terminal.
 
-### Sending your first code
+## Sending your first code
 
 Let's start with sending our first piece of code to be evaluated. In the script editor (likely the top left window) write a simple piece of code, say
 
@@ -63,7 +63,7 @@ To send this code from the editor to be run by R you have a few options:
 
 `r margin_note("I tend to prefer using 'ctrl + enter' as I like using keyboard shortcuts. If you want to see all available keyboard shortcuts either go to Help and choose keyboard shortcuts, alternatively 'Alt + shft + k' is the keyboard shortcut for the keyboard shortcut menu.")`
 
-## Course R package
+# Course R package
 
 Make sure that you have the course package loaded into the current session. Instructions on how to install the package are contained in the appendix to the course notes. You should only need to install a package once using `install.packages()` and then we need to use `library()` in every session or script that we want to use the functionality of that package.
 
@@ -71,7 +71,7 @@ Make sure that you have the course package loaded into the current session. Inst
 library("jrIntroduction")
 ```
 
-## Vectors
+# Vectors
 
 Write the following code in the editor and run it
 
@@ -81,7 +81,7 @@ x1 = GetNumericVector()
 
 This code generates a large vector of random numbers such that everyone has the same.^[This function is part of the course package `jrIntroduction`, you can view it's help page if you like `r knitr::inline_expr('?GetNumericVector()')`]
 
-  (1) How many elements are in `x1`? (i.e What's is the length of `x1`)
+  (1) How many elements are in `x1`? (i.e What is the length of `x1`)
   
     ```{r, indent = '  '}
     length(x1)
@@ -99,25 +99,59 @@ This code generates a large vector of random numbers such that everyone has the 
     x1[length(x1)]
     ```
   
-  (1) What is the mean value of `x1`?
-
-    ```{r}
-    mean(x1)
-    ```
-
-  (1) What is the smallest value of `x1`?
-
-    ```{r}
-    min(x1)
-    ```
-  
   (1) What is the 50^th^ smallest value of `x1`?
 
     ```{r}
     sort(x1)[50]
     ```
+    
+  (1) How many unique values are there in `x1`?
+  
+    ```{r}
+    length(unique(x1))
+    ```
+    
+  (1) What is the total of all elements?
+  
+  ```{r}
+  sum(x1)
+  ```
+  
+  (1) What is the sum of every 5th element, i.e $5^{th}$ + $10^{th}$ + ...
+  
+  ```{r}
+  x1[seq(5,length(x1),5)]
+  ```
+  
+The following code will load a data set into your current session which contains a vector of frequencies of names of babys born in the US in 2000.
 
-## Reading and Writing data
+```{r, echo = TRUE}
+data(names, package = "jrIntroduction")
+```
+
+The vector loaded into the session is called `names` and is the subject of the following questions
+
+  (1)  How many babys were named John?
+  
+  ```{r}
+  names["John"]
+  ```
+  
+  (1) How many babys were born in 2000?
+  
+  ```{r}
+  sum(names)
+  ```
+  
+  (1) What was the most common name that year?
+  
+  ```{r}
+  sort(names,decreasing = TRUE)[1]
+  ## we haven't seen this function yet but you could also use
+  which.max(names)
+  ```
+
+# Reading and Writing data
 
 This section is intended to make sure you feel happy reading and writing data into and out of R respectively.
 
@@ -165,7 +199,7 @@ library("readr")
     movies = read_excel("movies.xlsx")
     ```
 
-## Data frames and tibbles
+# Data frames and tibbles
 
 ```{r, echo = FALSE}
 movies_t = as_tibble(movies)
@@ -262,13 +296,13 @@ movies_d
     summarise(movies, mean(votes))
     ```
 
-## Do you understand your own script
+# Do you understand your own script
 
 Look over the script file that contains all of the code that you have written to answer the questions in this practical session. Do you feel confident that you could look on this in a months time and know exactly what is going on in your code? Does your code have an order to it or are commands written in a disorganised fashion. Are there any syntax errors in any of the code that is in your script? Could I copy and paste your script and run it through to completion with no issues on my laptop? If you feel like your script could improve in any of these areas, go back and tidy it up. Write comments alongside bits of code describing why you have done what you have done if it's not obvious at first glance. Get rid of all the syntax errors and make sure that if you were to run all your code at once from top to bottom, you would still get all the correct answers and there would be no errors.^[A quick acid test for this is to run `rm(list = ls())` to delete all stored variables, then `ctrl + shft + F10` to restart the R session, followed by `ctrl + shft + s` to run all the code.]
 
 I appreciate that this might sound a little pedantic but getting into the habit of doing this sort of thing now will make your life much more pleasant in the long run. If you naturally write your code like that already, great, I wish I could be more like you. I wish I had got into this sort of habit much earlier.
 
-## Solutions
+# Solutions
 
 Solutions to the practical questions are contained within in the package
 
