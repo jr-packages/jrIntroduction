@@ -10,7 +10,7 @@ knit_theme$set(knit_theme$get("greyscale0"))
 #                dev='pdf', fig.width=5, fig.height=5, 
 #               cache=FALSE)
 # knit_hooks$set(crop=hook_pdfcrop)
-suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(dplyr))
 
 # figure referencing hack
 fig <- local({
@@ -166,11 +166,11 @@ par(op)
 
 # Data manipulation 
 
-This section will hopefully help you get more comfortable with some of the `dplyr` functionality for "wrangling" your data. We will do some data wrangling and the use that to add to our two plots so far. Make sure you load in the `dplyr` package or just load all `tidyverse` packages at once.
+This section will hopefully help you get more comfortable with some of the `dplyr` functionality for "wrangling" your data. We will do some data wrangling and the use that to add to our two plots so far. Make sure you load in the `dplyr` package
 
 ```{r, echo = 2, eval = 2}
-suppressPackageStartupMessages(library(tidyverse))
-library(tidyverse)
+suppressPackageStartupMessages(library(dplyr))
+library(dplyr)
 ```
 
 

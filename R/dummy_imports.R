@@ -1,2 +1,2 @@
-#' @import tidyverse readr
+#' @import dplyr readr
 NULL

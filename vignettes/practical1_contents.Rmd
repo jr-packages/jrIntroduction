@@ -11,7 +11,7 @@ opts_chunk$set(fig.path='figure/graphics-',
                dev='pdf', fig.width=5, fig.height=5, 
                fig.show='hold', cache=FALSE, par=TRUE)
 knit_hooks$set(crop=hook_pdfcrop)
-suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(dplyr))
 ```
 
 
@@ -205,10 +205,10 @@ library("readr")
 movies_t = as_tibble(movies)
 ```
 
-For this section we will be using some of the functions from the `dplyr` package. Since we are starting to use more of the packages that are included in the "tidyverse" it makes sense to load the package
+For this section we will be using some of the functions from the `dplyr` package
 
 ```{r, echo=TRUE, eval = FALSE}
-library("tidyverse") # library each time we want to use them
+library("dplyr") # library each time we want to use them
 ```
 
 You should already have the `movies` data frame loaded from the package. To
