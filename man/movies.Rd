@@ -44,6 +44,6 @@ data(movies)
 }
 \references{
 Credit: This data set was initially constructed by
-Hadley Wickham at \url{http://had.co.nz/data/movies}
+Hadley Wickham.
 }
 \keyword{datasets}
