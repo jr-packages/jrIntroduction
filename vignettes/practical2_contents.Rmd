@@ -10,7 +10,6 @@ knit_theme$set(knit_theme$get("greyscale0"))
 #                dev='pdf', fig.width=5, fig.height=5, 
 #               cache=FALSE)
 # knit_hooks$set(crop=hook_pdfcrop)
-suppressPackageStartupMessages(library(dplyr))
 
 # figure referencing hack
 fig <- local({
@@ -34,262 +33,102 @@ fig <- local({
 
 ## A suggestion
 
-This is just a suggestion to try and help get you into "good habits" early. If I was sitting to take this practical now, I would start a new script within the same RStudio project that you should have created as part of the first practical. That way all of the work that you have done associated with today's course is in one place, and the code for each of the practicals is separate from one another. This might feel a bit tedious right now, but as the amount of code you write and number of projects you take part in increases it will pay off to have a structured workflow. 
+This is just a suggestion to try and help get you into "good habits" early. If I was sitting to take this practical now, I would start a new R script file. That way all of the work that you have done associated with today's course is in one place, and the code for each of the practicals is separate from one another. This might feel a bit tedious right now, but as the amount of code you write and number of projects you take part in increases it will pay off to have a structured workflow. 
 
-# Base Graphics
 
-We will continue to investigate the movies data from earlier. Make sure that you have the data loaded into the session as part of your new script (if you started one).
+# Data frames 
 
-```{r, echo = TRUE, eval = TRUE}
-data(movies, package = "jrIntroduction")
+For this set of questions we will use the movies data from the IMDB database. This data is contained in a package called `ggplot2movies`. To load the data into your current session you can use
+
+```{r}
+data(movies, package = "ggplot2movies")
 ```
 
-## Scatter plots
-
-Let's start with a basic scatter plot of the movie ratings against their lengths to generate something like 
-figure 1.
-
-<!-- `r fig$ref("scatter_simple")` not entirely sure why this isnt' working?-->
-
-```{r fig.margin = TRUE, fig.cap=fig$cap('scatter_simple',"A basic scatter plot."), echo = TRUE}
-plot(movies$Length, movies$Rating)
-```
-
-Whilst this can be informative at the data exploration stage, it isn't very aesthetically pleasing. First off the default axis labels are not very good.
-
-(1) Use the `xlab` and `ylab` arguments^[Arguments are the things we pass to our function inside the `()` to control the behavior of that function.] to the plot function to change the axis labels to something more sensible
-
-    ```{r, eval = FALSE}
-    plot(movies$Length, movies$Rating,
-         xlab = "Length", ylab = "Rating")
-    ```
-
-(1) The range of possible ratings is between 0 and 10. Use the `ylim` argument to specify a new axis range. The `ylim` argument expects a vector of length 2 to be passed to it.^[Check back in the notes for how to create vectors if you need to.]
-
-    ```{r, eval = FALSE}
-    plot(movies$Length, movies$Rating,
-         xlab = "Length", ylab = "Rating",
-         ylim = c(0,10))
-    ```
-
-(1) I personally don't like the default point type either, `pch = 19` is a much nicer choice in my opinion. Change the points in your graph (feel free to experiment with different values of `pch` to find one you like.)
-
-    ```{r, eval = FALSE}
-    plot(movies$Length, movies$Rating,
-         xlab = "Length", ylab = "Rating",
-         ylim = c(0,10), pch = 19)
-    ```
-    
-(1) Try changing the colours of your points. The argument for this can be a vector (of length 1 or more) of numbers or colour names. You can find out what colours are allowed by name by using the `colors()` function. What happens if you specify a `col` argument that is more than 1 value.
-
-    ```{r, eval = FALSE}
-    plot(movies$Length, movies$Rating,
-         xlab = "Length", ylab = "Rating",
-         ylim = c(0,10), pch = 19,
-         col = 2) # 2 is red
-    
-    # if you do something like col=1:4 inside plot()
-    # you end up with 4 coloured points. Essentially the
-    # col argument is a vector that recycles throughout
-    # the data if it is shorter than the data
-    ```
-
-(1) We could make this even neater by colouring points by a column in our data. If the colour argument is a vector then we could use the Comedy column to colour the Comedy film in one colour and the non comedy films in another colour. If we look at our data we will see that the Comedy column consists of 0`s and 1`s, there is no colour 0 so we can't pass this directly to `col`, but if we add 1 to this vector we could. Give it a try.
-
-    ```{r, eval = FALSE}
-    plot(movies$Length, movies$Rating,
-         xlab = "Length", ylab = "Rating",
-         ylim = c(0,10), pch = 19,
-         col = movies$Comedy + 1) # 2 is red
-    ```
-
-(1) Finally give the graph a title 
-
-    ```{r,eval  = FALSE}
-    plot(movies$Length, movies$Rating,
-         xlab = "Length", ylab = "Rating",
-         ylim = c(0,10), pch = 19,
-         col = movies$Comedy + 1,#
-         main = "Ratings against Lengths for Comedy films") # 2 is red
-    ```
-
-(1) We saw in the notes how to create a bar chart from some categorical data by using a combination of the `table()` function and the `barplot()` function. We are going to do similar here to create a bar chart that looks at the distribution of the mpaa rating of films for both comedies and non comedies. First use `table()` on both the Comedy and mpaa variables of the movies data frame and assign your result to a variable. 
+(1)  Use the `head()` function to inspect the top of the data, this can help give you a feel for what the data looks like and what variables are contained within the data?
 
     ```{r}
-    tab = table(movies$Comedy, movies$mpaa)
+    head(movies)
     ```
 
-
-(1) We can then use `barplot()` on the result.^[Note that which ever variable is spread as columns in your `table()` results, this is the groupings column of your barplot.]
-
-    ```{r, eval = FALSE}
-    barplot(tab)
-    ```
-
-(1) I think this is less informative than if the bars in each group were side by side. We can make this be the case by specifying the argument `beside = TRUE`
-
-    ```{r, eval = FALSE}
-    barplot(tab, beside = TRUE)
-    ```
+(1) How many films and how many variables are in this data set?
     
-(1) Hopefully you now have four groups of 2 bars along the x axis. If you haven't then try using `t()` for transpose around your table results before your barplot. Now we want the colours to match our original scatter plot, i.e black for non Comedy films and red for Comedies. This should be relatively easy here since we have already got Comedies being shown next to non Comedies in the graph. So we can just give a vector of colours to colour those bars in. Try `col = 1:2`. Do you understand why this works?
-
-    ```{r, eval = FALSE}
-    barplot(tab, beside = TRUE, col = 1:2)
-    ```
-    
-(1) Finally make sure that your graph has meaningful axis labels and title.
-
-    ```{r, eval = FALSE}
-    barplot(tab, beside = TRUE, col = 1:2,
-            xlab = "MPAA Ratings", ylab = "Frequency",
-            main = "Comedy films in red")
-    
+    ```{r}
+    dim(movies)
     ```
 
-
-We should now have two plots that look like those in Figure 2. <!--- `r fig$ref("double")`. --->
-
-```{r, fig.fullwidth = TRUE, fig.cap = fig$cap("double","A scatter plot and bar chart as a target for these exercises."), fig.width=9, fig.height=3, echo = FALSE}
-op = par(mfrow = c(1,2), mar = c(3,3,3,1))
- plot(movies$Length, movies$Rating,
-         xlab = "Length", ylab = "Rating",
-         ylim = c(0,10), pch = 19,
-         col = movies$Comedy + 1,#
-         main = "Ratings against Lengths for Comedy films") # 2 is red
-barplot(tab, beside = TRUE, col = 1:2,
-            xlab = "MPAA Ratings", ylab = "Frequency",
-            main = "Comedy films in red")
-par(op)
-```
-
-
-# Data manipulation 
-
-This section will hopefully help you get more comfortable with some of the `dplyr` functionality for "wrangling" your data. We will do some data wrangling and the use that to add to our two plots so far. Make sure you load in the `dplyr` package
-
-```{r, echo = 2, eval = 2}
-suppressPackageStartupMessages(library(dplyr))
-library(dplyr)
-```
-
-
-(1) We want to look at how film budgets have changed over time for both the Comedy and non Comedy films. To start with, since the `-1` encoding for films where we didn't know the budget is would distort any estimates of average we will remove these. Use the `filter()` function to remove them, try using the `%>%` operator notation if you like, `movies %>% filter(...)`
-
-    ```{r, eval = FALSE}
-    movies %>%
-      filter(Budget != -1)
-    ```
-
-
-(1) We want to look at comedy and non comedy films in each year, this is some sort of grouping structure which suggests use of the `group_by()` function. Create this grouping structure on the filtered movies data
-
-    ```{r, eval = FALSE}
-    movies %>% 
-      filter(Budget != -1) %>%
-      group_by(Year,Comedy)
-    ```
-
-(1) Use `summarise()` to calculate the average budget in each year for both comedy and non comedy films. When you do name the new column of averages `b` and store the final output data as a variable called `plotdat`
+(1) Recall that if I want to pull out a single column, or variable, from a data frame we can use `$`. To extract the titles from this data set we write `movies$title`.^[If you can't remember what the names of the columns are, you can use `colnames(movies)` to find out.] Using `mean()` and `median()` calculate these summary statistics for the film lengths
 
     ```{r}
-    plotdat = movies %>% 
-      filter(Budget != -1) %>%
-      group_by(Year,Comedy) %>%
-      summarise(b = mean(Budget))
-    ```
-
-(1) We could now create a line plot for the non comedy movies using^[Here we are using the formula notation for plots, refer back to the plotting section of the notes if you are unsure.]
-
-```{r, echo=FALSE, eval = TRUE}
-non_comedy = plotdat %>% 
-      filter(Comedy == 0)
-```
-
-
-    ```{r, echo = TRUE, eval = FALSE}
-    non_comedy = plotdat %>% 
-      filter(Comedy == 0)
-    plot(b~Year, data = non_comedy, type = "l", 
-         ylab = "Average Budget")
-    ```
-
-(1) Use `lines()` to add the corresponding line for the comedy films to be able to compare how the average budgets for each film type compares over time.
-
-```{r, eval = TRUE, echo = FALSE}
-comedy = plotdat %>% 
-      filter(Comedy == 1)
-```
-
-    ```{r, eval = FALSE}
-    comedy = plotdat %>% 
-      filter(Comedy == 1)
-    lines(b~Year, data = comedy, col = 2)
-    ```
-
-(1) Similarly create a data set which calculates the average rating for different film lengths for both comedy and non comedy films
-called `films`
-
-    ```{r}
-    films = movies %>%
-      group_by(Length,Comedy) %>%
-      summarise(r = mean(Rating))
-    ```
-
-(1) We could then plot the average rating against length for the non comedy films using the code below. In my data the average ratings column is called `r`
-
-```{r, eval=TRUE, echo = FALSE}
-non_films = films %>%
-           filter(Comedy == 0)
-```
-
-
-    ```{r, echo = TRUE, eval = FALSE}
-    non_films = films %>%
-           filter(Comedy == 0)
-    plot(r ~ Length, data = non_films, pch = 19,
-         ylab = "Average Rating")
-    ```
-
-(1) Add the points for the Comedy films in red using the `points()` function
-
-```{r, echo = FALSE}
-com_films = films %>% 
-      filter(Comedy == 1)
-```
-
-
-    ```{r, eval = FALSE}
-    com_films = films %>% 
-      filter(Comedy == 1)
-    points(r~Length, data = com_films, pch = 19, col = 2)
+    mean(movies$length)
+    median(movies$length)
     ```
     
-(1) You should now have snippets of code which generate four graphics concerning different aspects of the film data. Our final task is to stick them all together and interpret them. We can use the `par()` function to control finer aspects of the plot. See `?par` for all of the possible options. By far my most common usage of `par()` is to allow multiple graphs on one plot window. To do so we need the `mfrow` argument. `par(mfrow = c(2,2), mar = c(2,2,2,1), mpg = c(2,0,0))` tells R that from this point onward you want to draw your graphs in a 2 by 2 formation. `mar` sets the margins around each plot and `mgp` sets the axis label margins. If we then run each of our plots again we should get them all together in one
+(1) How many Action films are there in the data? (There is a 1 in the action column if it is an action film)
 
-```{r, fig.fullwidth = TRUE, out.width='100%', fig.width = 8, fig.height = 8}
-par(mfrow = c(2,2), mar = c(3,3,3,2), mgp= c(2,0,0))
-# 1
-plot(movies$Length, movies$Rating,
-     xlab = "Length", ylab = "Rating",
-     ylim = c(0,10), pch = 19,
-     col = movies$Comedy + 1,#
-     main = "Ratings against Lengths for Comedy films") # 2 is red
-# 2
-barplot(tab, beside = TRUE, col = 1:2,
-        xlab = "MPAA Ratings", ylab = "Frequency",
-        main = "Comedy films in red")
+    ```{r}
+    table(movies$Action)
+    ```
 
-# 3
-plot(b~Year, data = non_comedy, type = "l", 
-     ylab = "Average Budget")
-lines(b~Year, data = comedy, col = 2)
+(1) You can use `table()` on more than one column at once by just adding extra columns as arguments. For example `table(movies$mpaa, movies$Action)` would tell me how many action and non action films there are for each of the mpaa ratings. How many romantic comedy films are there? i.e a 1 in the Romance column and a 1 in the Comedy column?
 
-# 4 
-plot(r ~ Length, data = non_films, pch = 19,
-     ylab = "Average Rating")
-points(r~Length, data = com_films, pch = 19, col = 2)
+    ```{r}
+    table(movies$Romance, movies$Comedy)
+    ```
+
+(1) When the values are similar in each variable in the table, it can be difficult to tell which dimension (rows or columns) corresponds to which variable. To aid this there is an argument to the `table()` function, `dnn` which allows us to provide a vector of names. Try 
+
+    ```{r}
+    table(movies$Romance, movies$Comedy, dnn = c("Romance","Comedy"))
+    ```
+
+
+(1) What year is the oldest film in the data set from?
+
+    ```{r}
+    min(movies$year)
+    ```
+
+(1) How long is the longest film?
+
+    ```{r}
+    max(movies$length)
+    ```
+
+(1) What is the standard deviation of the film ratings?
+
+    ```{r}
+    sd(movies$rating)
+    ```
+
+(1) How many people cast their vote on a film on average?
+
+    ```{r}
+    mean(movies$votes)
+    ```
+
+(1) We have seen that `sort()` can be used to arrange values in a vector into ascending or descending order. With data frames we are often interested in being able to order the data set based on the order of one of the variables. For example, rearranging the movies data by year of release. To accomplish this we can use `order()`. `r knitr::inline_expr("movies[order(movies$year),]")` would acheive this example. Give it a try.
+
+The following question is a little harder:
+
+(1) What is the average length of the 50 best (highest rating) films? How does this compare to the average of all films.
+
+    ```{r}
+    # rearrange the data
+    movies_sorted = movies[order(movies$rating, decreasing = TRUE),]
+    # take the best 50
+    best = movies_sorted[1:50,]
+    # calculate average length
+    mean(best$length)
+    # compared to overall average length
+    mean(movies$length)
+    # perhaps surprisingly 30 mins shorter average for the best films
+    ```
+
+
+# Solutions
+
+Solutions to the practical questions are contained within the package
+
+```{r, eval= FALSE, echo = TRUE}
+vignette("solutions2", package = "jrIntroduction")
 ```
-
-
-

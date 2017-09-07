@@ -2,7 +2,7 @@
 title: "Practical 1"
 author: "Jumping Rivers"
 output: #rmarkdown::html_vignette
-  tufte_handout:
+  tufte::tufte_html:
     highlight: tango
 vignette: >
   %\VignetteIndexEntry{Practical 1}

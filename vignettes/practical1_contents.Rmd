@@ -17,27 +17,9 @@ suppressPackageStartupMessages(library(dplyr))
 
 # Getting Started
 
-It's a good idea to start a new R Studio project for this course. This will keep all of this work separate from any other projects you might undertake in the future and will help to keep your work nicely organised.^[RStudio allows you to quickly and easily switch between different projects so you can keep each piece of work in it's own project.]
-
-To start a new project go to
-
-```
-  File -> New Project
-```
-
-At the pop up options I would recommend choosing
-
-```
-  New Directory -> Empty Project
-```
-
-and then choose a name and a place to save your new project.
-
-You can find further information on using RStudio projects at their website http://www.rstudio.com/ide/docs/using/projects ^[RStudio has lots of useful documentation for lots of different topics and is a continuing useful resource as your experience grows.]
-
 ## Start a new script file
 
-If a new empty R script file does not open automatically when you create your project you can open a new one^[Alternatively use `ctrl + shft + n` to launch a new R script]
+If a new empty R script file does not open automatically when you launch RStudio you can open a new one^[Alternatively use `ctrl + shft + n` to launch a new R script]
 
 ```
    File -> New File -> Rscript
@@ -113,15 +95,9 @@ This code generates a large vector of random numbers such that everyone has the 
     
   (1) What is the total of all elements?
   
-  ```{r}
-  sum(x1)
-  ```
-  
-  (1) What is the sum of every 5th element, i.e $5^{th}$ + $10^{th}$ + ...
-  
-  ```{r}
-  x1[seq(5,length(x1),5)]
-  ```
+    ```{r}
+    sum(x1)
+    ```
   
 The following code will load a data set into your current session which contains a vector of frequencies of names of babys born in the US in 2000.
 
@@ -133,178 +109,28 @@ The vector loaded into the session is called `names` and is the subject of the f
 
   (1)  How many babys were named John?
   
-  ```{r}
-  names["John"]
-  ```
+    ```{r}
+    names["John"]
+    ```
   
   (1) How many babys were born in 2000?
   
-  ```{r}
-  sum(names)
-  ```
+    ```{r}
+    sum(names)
+    ```
   
   (1) What was the most common name that year?
   
-  ```{r}
-  sort(names,decreasing = TRUE)[1]
-  ## we haven't seen this function yet but you could also use
-  which.max(names)
-  ```
-
-# Reading and Writing data
-
-This section is intended to make sure you feel happy reading and writing data into and out of R respectively.
-
-First, load the movies data from the package
-
-```{r, echo = TRUE}
-data(movies, package = "ggplot2movies")
-```
-
-We can write this data to a file using the `write_csv()` function from the `readr` package:
-
-```{r, echo = TRUE}
-library("readr")
-```
-
-
-  (1) Write the contents of the movies data frame out to a file, you can call this file whatever you like. Once you have done so verify that it is there by using your file browser to locate it. **Don't forget the .csv file extension**^[Strictly the file extension is not needed, it is just a mechanism your computer uses to determine what program should open a certain file. It is however good practice to include the file extensions.]
-    ```{r, eval = FALSE}
-    write_csv(movies, "jumpingrivers.csv")
-    ```
-
-  (1) Make sure that you can read the data back in, when you do assign it to a variable called `movies`
-    ```{r, eval = FALSE}
-    movies = read_csv("jumpingrivers.csv")
-    ```
-
-  (1) The package also contains an Excel version of the movies data. The motivation behind this question is that in the past a number of participants have been interested in how to export their data from an excel file they already have and import it into R. Running the code below should copy the excel file to your current working directory.^[The working directory is the default directory for reading and writing files from R. You can see what it is using `getwd()` and change it using `setwd()` passing a new directory path as an argument. Alternatively go to the Session tab of RStudio to change it.]
-    ```{r, echo = TRUE, eval = FALSE}
-    GetExcelMovies()
-    ```
-  (a) If you have successfully copied the file, open it using Excel.
-  (a) You should be able to save this spreadsheet as a csv by either
-    ```
-      File -> Save As
-    ```
-    and choosing .csv (Comma Separated Value) as the file type or
-    ```
-      File -> Export
-    ```
-    export as csv depending on which version of Excel you are running. 
-  (a) Once you have done this make sure that you can then read it in using `read_csv()`
-  Alternatively, you could try
-    ```{r, eval=FALSE, echo=TRUE}
-    library(readxl)
-    movies = read_excel("movies.xlsx")
-    ```
-
-# Data frames and tibbles
-
-```{r, echo = FALSE}
-movies_t = as_tibble(movies)
-```
-
-For this section we will be using some of the functions from the `dplyr` package
-
-```{r, echo=TRUE, eval = FALSE}
-library("dplyr") # library each time we want to use them
-```
-
-You should already have the `movies` data frame loaded from the package. To
-understand the difference between data frames and tibbles, we remove the `tibble` tag
-and create another object
-
-```{r, echo = TRUE}
-movies_d = as.data.frame(movies)
-```
-
-You could print out the data to inspect it by typing its variable name, e.g
-```{r, results="hide"}
-movies
-movies_d
-```
-
-(1)  What is the difference if you print out the contents of `movies` and `movies_d`?
-
     ```{r}
-    ## movies has a much tidier print method, showing the top few rows and the types of data in each column. 
-    ## It keeps everything on screen
+    sort(names,decreasing = TRUE)[1]
+    ## we haven't seen this function yet 
+    ## but you could also use
+    which.max(names)
     ```
-
-(1) Likewise we can observe the differences between the data frame `movies_d` and the tibble `movies` when we try to pull out an individual column. Try pulling out the `year` column using both the `$year` notation and the `[,2]` notation. What are the differences between `movies` and `movies_d` for these two operations?
-
-    ```{r, eval = FALSE}
-    movies$year
-    movies_d$year
-    
-    ## give the same thing, a vector
-    ```
-
-    ```{r, eval = FALSE}
-    movies[,2]
-    movies_d[,2]
-    
-    ## with the tibble we get back another tibble, (2 dimensional)
-    ## with the data frame we get a vector (1 dimensional)
-    ```
-
-(1) Using `mean()` and `median()` calculate these summary statistics for the film lengths
-
-    ```{r}
-    # either
-    mean(movies$length)
-    median(movies$length)
-    # or
-    summarise(movies, mean(length), median(length))
-    # Either is fine, but from now on in the solutions I will use the dplyr option with the tibble movies
-    ```
-    
-(1) How many Action films are there in the data? (There is a 1 in the action column if it is an action film)
-
-    ```{r}
-    count(movies, Action)
-    ```
-
-(1) You can use both `count()` and `table()` on more than one column at once by just adding extra columns as arguments. For example `count(movies, mpaa, Action)` would tell me how many action and non action films there are for each of the mpaa ratings. How many romantic comedy films are there? i.e a 1 in the Romance column and a 1 in the Comedy column?
-
-    ```{r}
-    count(movies, Romance,Comedy)
-    ```
-
-(1) What year is the oldest film in the data set from?
-
-    ```{r}
-    summarise(movies, min(year))
-    ```
-
-(1) How long is the longest film?
-
-    ```{r}
-    summarise(movies, max(length))
-    ```
-
-(1) What is the standard deviation of the film ratings?
-
-    ```{r}
-    summarise(movies, sd(rating))
-    ```
-
-(1) How many people cast their vote on a film on average?
-
-    ```{r}
-    summarise(movies, mean(votes))
-    ```
-
-# Do you understand your own script
-
-Look over the script file that contains all of the code that you have written to answer the questions in this practical session. Do you feel confident that you could look on this in a months time and know exactly what is going on in your code? Does your code have an order to it or are commands written in a disorganised fashion. Are there any syntax errors in any of the code that is in your script? Could I copy and paste your script and run it through to completion with no issues on my laptop? If you feel like your script could improve in any of these areas, go back and tidy it up. Write comments alongside bits of code describing why you have done what you have done if it's not obvious at first glance. Get rid of all the syntax errors and make sure that if you were to run all your code at once from top to bottom, you would still get all the correct answers and there would be no errors.^[A quick acid test for this is to run `rm(list = ls())` to delete all stored variables, then `ctrl + shft + F10` to restart the R session, followed by `ctrl + shft + s` to run all the code.]
-
-I appreciate that this might sound a little pedantic but getting into the habit of doing this sort of thing now will make your life much more pleasant in the long run. If you naturally write your code like that already, great, I wish I could be more like you. I wish I had got into this sort of habit much earlier.
 
 # Solutions
 
-Solutions to the practical questions are contained within in the package
+Solutions to the practical questions are contained within the package
 
 ```{r, eval= FALSE, echo = TRUE}
 vignette("solutions1", package = "jrIntroduction")
