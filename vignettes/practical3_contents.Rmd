@@ -108,53 +108,53 @@ Whilst this can be informative at the data exploration stage, it isn't very aest
          main = "Ratings against Lengths for Comedy films") # 2 is red
     ```
 
-(1) We saw in the notes how to create a bar chart from some categorical data by using a combination of the `table()` function and the `barplot()` function. We are going to do similar here to create a bar chart that looks at the distribution of the mpaa rating of films for both comedies and non comedies. First use `table()` on both the Comedy and mpaa variables of the movies data frame and assign your result to a variable. 
+<!-- (1) We saw in the notes how to create a bar chart from some categorical data by using a combination of the `table()` function and the `barplot()` function. We are going to do similar here to create a bar chart that looks at the distribution of the mpaa rating of films for both comedies and non comedies. First use `table()` on both the Comedy and mpaa variables of the movies data frame and assign your result to a variable.  -->
 
-    ```{r}
-    tab = table(movies$Comedy, movies$mpaa)
-    ```
-
-
-(1) We can then use `barplot()` on the result.^[Note that which ever variable is spread as columns in your `table()` results, this is the groupings column of your barplot.]
-
-    ```{r, eval = FALSE}
-    barplot(tab)
-    ```
-
-(1) I think this is less informative than if the bars in each group were side by side. We can make this be the case by specifying the argument `beside = TRUE`
-
-    ```{r, eval = FALSE}
-    barplot(tab, beside = TRUE)
-    ```
-    
-(1) Hopefully you now have four groups of 2 bars along the x axis. If you haven't then try using `t()` for transpose around your table results before your barplot. Now we want the colours to match our original scatter plot, i.e black for non Comedy films and red for Comedies. This should be relatively easy here since we have already got Comedies being shown next to non Comedies in the graph. So we can just give a vector of colours to colour those bars in. Try `col = 1:2`. Do you understand why this works?
-
-    ```{r, eval = FALSE}
-    barplot(tab, beside = TRUE, col = 1:2)
-    ```
-    
-(1) Finally make sure that your graph has meaningful axis labels and title.
-
-    ```{r, eval = FALSE}
-    barplot(tab, beside = TRUE, col = 1:2,
-            xlab = "MPAA Ratings", ylab = "Frequency",
-            main = "Comedy films in red")
-    
-    ```
+<!--     ```{r} -->
+<!--     tab = table(movies$Comedy, movies$mpaa) -->
+<!--     ``` -->
 
 
-We should now have two plots that look like those in Figure 2. <!--- `r fig$ref("double")`. --->
+<!-- (1) We can then use `barplot()` on the result.^[Note that which ever variable is spread as columns in your `table()` results, this is the groupings column of your barplot.] -->
 
-```{r, fig.fullwidth = TRUE, fig.cap = fig$cap("double","A scatter plot and bar chart as a target for these exercises."), fig.width=9, fig.height=3, echo = FALSE}
-op = par(mfrow = c(1,2), mar = c(3,3,3,1))
+<!--     ```{r, eval = FALSE} -->
+<!--     barplot(tab) -->
+<!--     ``` -->
+
+<!-- (1) I think this is less informative than if the bars in each group were side by side. We can make this be the case by specifying the argument `beside = TRUE` -->
+
+<!--     ```{r, eval = FALSE} -->
+<!--     barplot(tab, beside = TRUE) -->
+<!--     ``` -->
+
+<!-- (1) Hopefully you now have four groups of 2 bars along the x axis. If you haven't then try using `t()` for transpose around your table results before your barplot. Now we want the colours to match our original scatter plot, i.e black for non Comedy films and red for Comedies. This should be relatively easy here since we have already got Comedies being shown next to non Comedies in the graph. So we can just give a vector of colours to colour those bars in. Try `col = 1:2`. Do you understand why this works? -->
+
+<!--     ```{r, eval = FALSE} -->
+<!--     barplot(tab, beside = TRUE, col = 1:2) -->
+<!--     ``` -->
+
+<!-- (1) Finally make sure that your graph has meaningful axis labels and title. -->
+
+<!--     ```{r, eval = FALSE} -->
+<!--     barplot(tab, beside = TRUE, col = 1:2, -->
+<!--             xlab = "MPAA Ratings", ylab = "Frequency", -->
+<!--             main = "Comedy films in red") -->
+
+<!--     ``` -->
+
+
+We should now have a plot that look like Figure 2. <!--- `r fig$ref("double")`. --->
+
+```{r, fig.fullwidth = FALSE, fig.cap = fig$cap("double","A scatter plot and bar chart as a target for these exercises."), fig.width=6, fig.height=3, echo = FALSE}
+op = par(mfrow = c(1,1), mar = c(3,3,3,1))
  plot(movies$Length, movies$Rating,
          xlab = "Length", ylab = "Rating",
          ylim = c(0,10), pch = 19,
          col = movies$Comedy + 1,#
          main = "Ratings against Lengths for Comedy films") # 2 is red
-barplot(tab, beside = TRUE, col = 1:2,
-            xlab = "MPAA Ratings", ylab = "Frequency",
-            main = "Comedy films in red")
+# barplot(tab, beside = TRUE, col = 1:2,
+#             xlab = "MPAA Ratings", ylab = "Frequency",
+#             main = "Comedy films in red")
 par(op)
 ```
 
