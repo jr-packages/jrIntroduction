@@ -106,7 +106,7 @@ data(movies, package = "ggplot2movies")
     mean(movies$votes)
     ```
 
-(1) We have seen that `sort()` can be used to arrange values in a vector into ascending or descending order. With data frames we are often interested in being able to order the data set based on the order of one of the variables. For example, rearranging the movies data by year of release. To accomplish this we can use `order()`. `r knitr::inline_expr("movies[order(movies$year),]")` would acheive this example. Give it a try.
+(1) We have seen that `sort()` can be used to arrange values in a vector into ascending or descending order. With data frames we are often interested in being able to order the data set based on the order of one of the variables. For example, rearranging the movies data by year of release. To accomplish this we can use `order()`.  `movies[order(movies$year),]` would acheive this example. Give it a try.
 
 The following question is a little harder:
 
