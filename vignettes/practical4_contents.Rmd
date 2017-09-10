@@ -68,69 +68,68 @@ data("movies",package = "ggplot2movies")
       summarise(b = mean(budget))
     ```
 
-(1) We could now create a line plot for the non comedy movies using^[Here we are using the formula notation for plots, refer back to the plotting section of the notes if you are unsure.]
+<!-- (1) We could now create a line plot for the non comedy movies using^[Here we are using the formula notation for plots, refer back to the plotting section of the notes if you are unsure.] -->
 
-```{r, echo=FALSE, eval = TRUE}
-non_comedy = plotdat %>% 
-      filter(Comedy == 0)
-```
-
-
-    ```{r, echo = TRUE, eval = FALSE}
-    non_comedy = plotdat %>% 
-      filter(Comedy == 0)
-    plot(b~year, data = non_comedy, type = "l", 
-         ylab = "Average Budget")
-    ```
-
-(1) Use `lines()` to add the corresponding line for the comedy films to be able to compare how the average budgets for each film type compares over time.
-
-```{r, eval = TRUE, echo = FALSE}
-comedy = plotdat %>% 
-      filter(Comedy == 1)
-```
-
-    ```{r, eval = FALSE}
-    comedy = plotdat %>% 
-      filter(Comedy == 1)
-    lines(b~year, data = comedy, col = 2)
-    ```
-
-(1) Similarly create a data set which calculates the average rating for different film lengths for both comedy and non comedy films
-called `films`
-
-    ```{r}
-    films = movies %>%
-      group_by(length,Comedy) %>%
-      summarise(r = mean(rating))
-    ```
-
-(1) We could then plot the average rating against length for the non comedy films using the code below. In my data the average ratings column is called `r`
-
-```{r, eval=TRUE, echo = FALSE}
-non_films = films %>%
-           filter(Comedy == 0)
-```
+<!-- ```{r, echo=FALSE, eval = TRUE} -->
+<!-- non_comedy = plotdat %>%  -->
+<!--       filter(Comedy == 0) -->
+<!-- ``` -->
 
 
-    ```{r, echo = TRUE, eval = FALSE}
-    non_films = films %>%
-           filter(Comedy == 0)
-    plot(r ~ length, data = non_films, pch = 19,
-         ylab = "Average Rating")
-    ```
+<!--     ```{r, echo = TRUE, eval = FALSE} -->
+<!--     non_comedy = plotdat %>%  -->
+<!--       filter(Comedy == 0) -->
+<!--     plot(b~year, data = non_comedy, type = "l",  -->
+<!--          ylab = "Average Budget") -->
+<!--     ``` -->
 
-(1) Add the points for the Comedy films in red using the `points()` function
+<!-- (1) Use `lines()` to add the corresponding line for the comedy films to be able to compare how the average budgets for each film type compares over time. -->
 
-```{r, echo = FALSE}
-com_films = films %>% 
-      filter(Comedy == 1)
-```
+<!-- ```{r, eval = TRUE, echo = FALSE} -->
+<!-- comedy = plotdat %>%  -->
+<!--       filter(Comedy == 1) -->
+<!-- ``` -->
+
+<!--     ```{r, eval = FALSE} -->
+<!--     comedy = plotdat %>%  -->
+<!--       filter(Comedy == 1) -->
+<!--     lines(b~year, data = comedy, col = 2) -->
+<!--     ``` -->
+
+<!-- (1) Similarly create a data set which calculates the average rating for different film lengths for both comedy and non comedy films -->
+<!-- called `films` -->
+
+<!--     ```{r} -->
+<!--     films = movies %>% -->
+<!--       group_by(length,Comedy) %>% -->
+<!--       summarise(r = mean(rating)) -->
+<!--     ``` -->
+
+<!-- (1) We could then plot the average rating against length for the non comedy films using the code below. In my data the average ratings column is called `r` -->
+
+<!-- ```{r, eval=TRUE, echo = FALSE} -->
+<!-- non_films = films %>% -->
+<!--            filter(Comedy == 0) -->
+<!-- ``` -->
 
 
-    ```{r, eval = FALSE}
-    com_films = films %>% 
-      filter(Comedy == 1)
-    points(r~length, data = com_films, pch = 19, col = 2)
-    ```
-    
+<!--     ```{r, echo = TRUE, eval = FALSE} -->
+<!--     non_films = films %>% -->
+<!--            filter(Comedy == 0) -->
+<!--     plot(r ~ length, data = non_films, pch = 19, -->
+<!--          ylab = "Average Rating") -->
+<!--     ``` -->
+
+<!-- (1) Add the points for the Comedy films in red using the `points()` function -->
+
+<!-- ```{r, echo = FALSE} -->
+<!-- com_films = films %>%  -->
+<!--       filter(Comedy == 1) -->
+<!-- ``` -->
+
+
+<!--     ```{r, eval = FALSE} -->
+<!--     com_films = films %>%  -->
+<!--       filter(Comedy == 1) -->
+<!--     points(r~length, data = com_films, pch = 19, col = 2) -->
+<!--     ``` -->
