@@ -4,7 +4,7 @@ Title: Jumping Rivers: Introduction to R
 Version: 0.1.3
 Authors@R: c(person("Jamie", "Owen", email="jamie@jumpingrivers.com", role = c("aut", "cre")),
               person("Colin", "Gillespie", email="colin@jumpingrivers.com", role = "aut"))
-Description: A package for the Introduction to R course run by Jumping
+Description: Practicals and data sets for the Introduction to R course run by Jumping
   Rivers.
 URL: http://www.jumpingrivers.com/
 License: GPL-3

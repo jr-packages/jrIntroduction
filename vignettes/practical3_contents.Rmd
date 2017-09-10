@@ -1,0 +1,206 @@
+```{r, include = FALSE, cache = FALSE}
+library(knitr)
+# opts_knit$set(out.format = "latex")
+knit_theme$set(knit_theme$get("greyscale0"))
+
+# options(replace.assign=FALSE,width=50)
+
+# opts_chunk$set(fig.path='figure/graphics-', 
+#                cache.path='cache/graphics-', 
+#                dev='pdf', fig.width=5, fig.height=5, 
+#               cache=FALSE)
+# knit_hooks$set(crop=hook_pdfcrop)
+
+# figure referencing hack
+fig <- local({
+    i <- 0
+    ref <- list()
+    list(
+        cap=function(refName, text) {
+            i <<- i + 1
+            ref[[refName]] <<- paste0("Figure ",i)
+            paste("Figure ", i, ": ", text, sep="")
+        },
+        ref=function(refName) {
+            ref[[refName]]
+        })
+})
+
+# usage 
+# chunk options fig.cap = fig$cap(<label>, <caption>)
+# reference `r fig$ref(<label>)`
+```
+
+# Base Graphics
+
+We will continue to investigate the movies data from earlier. Make sure that you have the data loaded into the session as part of your new script (if you started one).
+
+```{r, echo = TRUE, eval = TRUE}
+data(movies, package = "jrIntroduction")
+```
+
+## Scatter plots
+
+Let's start with a basic scatter plot of the movie ratings against their lengths to generate something like 
+figure 1.
+
+<!-- `r fig$ref("scatter_simple")` not entirely sure why this isnt' working?-->
+
+```{r fig.margin = TRUE, fig.cap=fig$cap('scatter_simple',"A basic scatter plot."), echo = TRUE}
+plot(movies$Length, movies$Rating)
+```
+
+Whilst this can be informative at the data exploration stage, it isn't very aesthetically pleasing. First off the default axis labels are not very good.
+
+(1) Use the `xlab` and `ylab` arguments^[Arguments are the things we pass to our function inside the `()` to control the behavior of that function.] to the plot function to change the axis labels to something more sensible
+
+    ```{r, eval = FALSE}
+    plot(movies$Length, movies$Rating,
+         xlab = "Length", ylab = "Rating")
+    ```
+
+(1) The range of possible ratings is between 0 and 10. Use the `ylim` argument to specify a new axis range. The `ylim` argument expects a vector of length 2 to be passed to it.^[Check back in the notes for how to create vectors if you need to.]
+
+    ```{r, eval = FALSE}
+    plot(movies$Length, movies$Rating,
+         xlab = "Length", ylab = "Rating",
+         ylim = c(0,10))
+    ```
+
+(1) I personally don't like the default point type either, `pch = 19` is a much nicer choice in my opinion. Change the points in your graph (feel free to experiment with different values of `pch` to find one you like.)
+
+    ```{r, eval = FALSE}
+    plot(movies$Length, movies$Rating,
+         xlab = "Length", ylab = "Rating",
+         ylim = c(0,10), pch = 19)
+    ```
+    
+(1) Try changing the colours of your points. The argument for this can be a vector (of length 1 or more) of numbers or colour names. You can find out what colours are allowed by name by using the `colors()` function. What happens if you specify a `col` argument that is more than 1 value.
+
+    ```{r, eval = FALSE}
+    plot(movies$Length, movies$Rating,
+         xlab = "Length", ylab = "Rating",
+         ylim = c(0,10), pch = 19,
+         col = 2) # 2 is red
+    
+    # if you do something like col=1:4 inside plot()
+    # you end up with 4 coloured points. Essentially the
+    # col argument is a vector that recycles throughout
+    # the data if it is shorter than the data
+    ```
+
+(1) We could make this even neater by colouring points by a column in our data. Since the colour argument is a vector then we could use the Comedy column to colour the Comedy films in one colour and the non comedy films in another colour. If we look at our data we will see that the Comedy column consists of 0`s and 1`s, there is no colour 0 so we can't pass this directly to `col`, but if we add 1 to this vector we could. Give it a try.
+
+    ```{r, eval = FALSE}
+    plot(movies$Length, movies$Rating,
+         xlab = "Length", ylab = "Rating",
+         ylim = c(0,10), pch = 19,
+         col = movies$Comedy + 1) # 2 is red
+    ```
+
+(1) Finally give the graph a title 
+
+    ```{r,eval  = FALSE}
+    plot(movies$Length, movies$Rating,
+         xlab = "Length", ylab = "Rating",
+         ylim = c(0,10), pch = 19,
+         col = movies$Comedy + 1,#
+         main = "Ratings against Lengths for Comedy films") # 2 is red
+    ```
+
+(1) We saw in the notes how to create a bar chart from some categorical data by using a combination of the `table()` function and the `barplot()` function. We are going to do similar here to create a bar chart that looks at the distribution of the mpaa rating of films for both comedies and non comedies. First use `table()` on both the Comedy and mpaa variables of the movies data frame and assign your result to a variable. 
+
+    ```{r}
+    tab = table(movies$Comedy, movies$mpaa)
+    ```
+
+
+(1) We can then use `barplot()` on the result.^[Note that which ever variable is spread as columns in your `table()` results, this is the groupings column of your barplot.]
+
+    ```{r, eval = FALSE}
+    barplot(tab)
+    ```
+
+(1) I think this is less informative than if the bars in each group were side by side. We can make this be the case by specifying the argument `beside = TRUE`
+
+    ```{r, eval = FALSE}
+    barplot(tab, beside = TRUE)
+    ```
+    
+(1) Hopefully you now have four groups of 2 bars along the x axis. If you haven't then try using `t()` for transpose around your table results before your barplot. Now we want the colours to match our original scatter plot, i.e black for non Comedy films and red for Comedies. This should be relatively easy here since we have already got Comedies being shown next to non Comedies in the graph. So we can just give a vector of colours to colour those bars in. Try `col = 1:2`. Do you understand why this works?
+
+    ```{r, eval = FALSE}
+    barplot(tab, beside = TRUE, col = 1:2)
+    ```
+    
+(1) Finally make sure that your graph has meaningful axis labels and title.
+
+    ```{r, eval = FALSE}
+    barplot(tab, beside = TRUE, col = 1:2,
+            xlab = "MPAA Ratings", ylab = "Frequency",
+            main = "Comedy films in red")
+    
+    ```
+
+
+We should now have two plots that look like those in Figure 2. <!--- `r fig$ref("double")`. --->
+
+```{r, fig.fullwidth = TRUE, fig.cap = fig$cap("double","A scatter plot and bar chart as a target for these exercises."), fig.width=9, fig.height=3, echo = FALSE}
+op = par(mfrow = c(1,2), mar = c(3,3,3,1))
+ plot(movies$Length, movies$Rating,
+         xlab = "Length", ylab = "Rating",
+         ylim = c(0,10), pch = 19,
+         col = movies$Comedy + 1,#
+         main = "Ratings against Lengths for Comedy films") # 2 is red
+barplot(tab, beside = TRUE, col = 1:2,
+            xlab = "MPAA Ratings", ylab = "Frequency",
+            main = "Comedy films in red")
+par(op)
+```
+
+## Question 2
+
+Run the folowing R code:
+
+```{r, echo= TRUE}
+data(USnames,package = "jrIntroduction")
+```
+
+The data frame `USnames` is a collection of names given to babies born in the US between 2011 and 2014. 
+
+(1) Make sure you are comfortable with what the data looks like using `head()` and `colnames()`.
+
+    ```{r}
+    head(USnames)
+    colnames(USnames)
+    ```
+
+
+(1) Create a subset of those born in 2012, i.e `Year == 2012` called `y`.
+
+    ```{r}
+    y = USnames[USnames$Year == 2012,]
+    ```
+
+(1) What is the total number of children born in this year?
+
+    ```{r}
+    sum(y$Count)
+    ```
+
+(1) Were more male or females children born during the 4 years?
+
+    ```{r}
+    females = USnames[USnames$Gender == "F",]
+    nrow(females)
+    males = USnames[USnames$Gender == "M",]
+    nrow(males)
+    ## more females
+    ```
+
+(1) How many names were used less than 10 times?
+
+    ```{r}
+    nrow(USnames[USnames$Count < 10, ])
+    ```
+

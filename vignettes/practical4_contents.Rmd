@@ -1,0 +1,136 @@
+```{r, include = FALSE, cache = FALSE}
+library(knitr)
+# opts_knit$set(out.format = "latex")
+knit_theme$set(knit_theme$get("greyscale0"))
+
+# options(replace.assign=FALSE,width=50)
+
+# opts_chunk$set(fig.path='figure/graphics-', 
+#                cache.path='cache/graphics-', 
+#                dev='pdf', fig.width=5, fig.height=5, 
+#               cache=FALSE)
+# knit_hooks$set(crop=hook_pdfcrop)
+suppressPackageStartupMessages(library(dplyr))
+
+# figure referencing hack
+fig <- local({
+    i <- 0
+    ref <- list()
+    list(
+        cap=function(refName, text) {
+            i <<- i + 1
+            ref[[refName]] <<- paste0("Figure ",i)
+            paste("Figure ", i, ": ", text, sep="")
+        },
+        ref=function(refName) {
+            ref[[refName]]
+        })
+})
+
+# usage 
+# chunk options fig.cap = fig$cap(<label>, <caption>)
+# reference `r fig$ref(<label>)`
+```
+
+# Data manipulation 
+
+This section will hopefully help you get more comfortable with some of the `dplyr` functionality for "wrangling" your data. We will do some data wrangling and the use that to create some plots. Make sure you load in the `dplyr` package and the `movies` data set.
+
+```{r, echo = 2:3, eval = 2:3}
+suppressPackageStartupMessages(library(dplyr))
+library(dplyr)
+data("movies",package = "ggplot2movies")
+```
+
+
+(1) We want to look at how film budgets have changed over time for both the Comedy and non Comedy films. To start with, since there are missing values `NA` for films where we didn't know the budget, there could be complications for calculating averages and plots. We can use the `is.na()` function to find such values. Use the `filter()` function to remove them, try using the `%>%` operator notation if you like, `movies %>% filter(!is.na(...))`
+
+    ```{r, eval = FALSE}
+    movies %>%
+      filter(!is.na(budget))
+    ```
+
+
+(1) We want to look at comedy and non comedy films in each year, this is some sort of grouping structure which suggests use of the `group_by()` function. Create this grouping structure on the filtered movies data
+
+    ```{r, eval = FALSE}
+    movies %>% 
+      filter(!is.na(budget)) %>%
+      group_by(year,Comedy)
+    ```
+
+(1) Use `summarise()` to calculate the average budget in each year for both comedy and non comedy films. When you do name the new column of averages `b` and store the final output data as a variable called `plotdat`
+
+    ```{r}
+    plotdat = movies %>% 
+      filter(!is.na(budget)) %>%
+      group_by(year,Comedy) %>%
+      summarise(b = mean(budget))
+    ```
+
+(1) We could now create a line plot for the non comedy movies using^[Here we are using the formula notation for plots, refer back to the plotting section of the notes if you are unsure.]
+
+```{r, echo=FALSE, eval = TRUE}
+non_comedy = plotdat %>% 
+      filter(Comedy == 0)
+```
+
+
+    ```{r, echo = TRUE, eval = FALSE}
+    non_comedy = plotdat %>% 
+      filter(Comedy == 0)
+    plot(b~year, data = non_comedy, type = "l", 
+         ylab = "Average Budget")
+    ```
+
+(1) Use `lines()` to add the corresponding line for the comedy films to be able to compare how the average budgets for each film type compares over time.
+
+```{r, eval = TRUE, echo = FALSE}
+comedy = plotdat %>% 
+      filter(Comedy == 1)
+```
+
+    ```{r, eval = FALSE}
+    comedy = plotdat %>% 
+      filter(Comedy == 1)
+    lines(b~year, data = comedy, col = 2)
+    ```
+
+(1) Similarly create a data set which calculates the average rating for different film lengths for both comedy and non comedy films
+called `films`
+
+    ```{r}
+    films = movies %>%
+      group_by(length,Comedy) %>%
+      summarise(r = mean(rating))
+    ```
+
+(1) We could then plot the average rating against length for the non comedy films using the code below. In my data the average ratings column is called `r`
+
+```{r, eval=TRUE, echo = FALSE}
+non_films = films %>%
+           filter(Comedy == 0)
+```
+
+
+    ```{r, echo = TRUE, eval = FALSE}
+    non_films = films %>%
+           filter(Comedy == 0)
+    plot(r ~ length, data = non_films, pch = 19,
+         ylab = "Average Rating")
+    ```
+
+(1) Add the points for the Comedy films in red using the `points()` function
+
+```{r, echo = FALSE}
+com_films = films %>% 
+      filter(Comedy == 1)
+```
+
+
+    ```{r, eval = FALSE}
+    com_films = films %>% 
+      filter(Comedy == 1)
+    points(r~length, data = com_films, pch = 19, col = 2)
+    ```
+    
