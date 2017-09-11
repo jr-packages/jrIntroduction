@@ -40,7 +40,7 @@ This is just a suggestion to try and help get you into "good habits" early. If I
 
 For this set of questions we will use the movies data from the IMDB database. This data is contained in a package called `ggplot2movies`. To load the data into your current session you can use
 
-```{r}
+```{r, echo=TRUE}
 data(movies, package = "ggplot2movies")
 ```
 
@@ -77,7 +77,7 @@ data(movies, package = "ggplot2movies")
 
 (1) When the values are similar in each variable in the table, it can be difficult to tell which dimension (rows or columns) corresponds to which variable. To aid this there is an argument to the `table()` function, `dnn` which allows us to provide a vector of names. Try 
 
-    ```{r}
+    ```{r, echo=TRUE}
     table(movies$Romance, movies$Comedy, dnn = c("Romance","Comedy"))
     ```
 
@@ -106,7 +106,7 @@ data(movies, package = "ggplot2movies")
     mean(movies$votes)
     ```
 
-(1) We have seen that `sort()` can be used to arrange values in a vector into ascending or descending order. With data frames we are often interested in being able to order the data set based on the order of one of the variables. For example, rearranging the movies data by year of release. To accomplish this we can use `order()`.  `movies[order(movies$year),]` would acheive this example. Give it a try.
+(1) We have seen that `sort()` can be used to arrange values in a vector into ascending or descending order. With data frames we are often interested in being able to order the data set based on the order of one of the variables. For example, rearranging the movies data by year of release. To accomplish this we can use `order()`.  `movies[order(movies$year),]` would achieve this example. Give it a try.
 
 The following question is a little harder:
 

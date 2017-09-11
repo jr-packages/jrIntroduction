@@ -1,9 +1,12 @@
 ---
 title: "Practical 3"
 author: "Jumping Rivers"
-output: #rmarkdown::html_vignette
-  tufte::tufte_html:
-    highlight: tango
+output:
+  tufte::tufte_handout:
+    latex_engine: xelatex
+    fig_width: 4
+    fig_height: 4
+tufte::tufte_html: default
 vignette: >
   %\VignetteIndexEntry{Practical 3}
   %\VignetteEngine{knitr::rmarkdown}
@@ -18,4 +21,10 @@ knitr::opts_chunk$set(results = "hide", echo = FALSE)
 
 
 ```{r child = 'practical3_contents.Rmd'}
+```
+
+## Solutions
+
+```{r, eval= FALSE, echo = TRUE}
+vignette("solutions3", package = "jrIntroduction")
 ```
