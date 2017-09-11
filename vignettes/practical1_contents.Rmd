@@ -99,7 +99,7 @@ This code generates a large vector of random numbers such that everyone has the 
     sum(x1)
     ```
   
-The following code will load a data set into your current session which contains a vector of frequencies of names of babys born in the US in 2000.
+The following code will load a data set into your current session which contains a vector of frequencies of names of babies born in the US in 2000.
 
 ```{r, echo = TRUE}
 data(names, package = "jrIntroduction")
@@ -107,13 +107,13 @@ data(names, package = "jrIntroduction")
 
 The vector loaded into the session is called `names` and is the subject of the following questions
 
-  (1)  How many babys were named John?
+  (1)  How many babies were named John?
   
     ```{r}
     names["John"]
     ```
   
-  (1) How many babys were born in 2000?
+  (1) How many children are in this data set?
   
     ```{r}
     sum(names)
@@ -122,7 +122,7 @@ The vector loaded into the session is called `names` and is the subject of the f
   (1) What was the most common name that year?
   
     ```{r}
-    sort(names,decreasing = TRUE)[1]
+    sort(names, decreasing = TRUE)[1]
     ## we haven't seen this function yet 
     ## but you could also use
     which.max(names)
