@@ -98,6 +98,9 @@ This code generates a large vector of random numbers such that everyone has the 
     ```{r}
     sum(x1)
     ```
+
+## Bonus questions
+
   
 The following code will load a data set into your current session which contains a vector of frequencies of names of babies born in the US in 2000.
 
@@ -123,9 +126,9 @@ The vector loaded into the session is called `names` and is the subject of the f
   
     ```{r}
     sort(names, decreasing = TRUE)[1]
-    ## we haven't seen this function yet 
+    ## We haven't seen this function yet 
     ## but you could also use
-    which.max(names)
+    names[which.max(names)]
     ```
 
 # Solutions
