@@ -27,9 +27,6 @@ fig <- local({
         })
 })
 
-# usage 
-# chunk options fig.cap = fig$cap(<label>, <caption>)
-# reference `r fig$ref(<label>)`
 ```
 
 # Data manipulation 
