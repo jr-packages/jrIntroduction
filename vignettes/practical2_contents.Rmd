@@ -1,17 +1,17 @@
 ```{r, include = FALSE, cache = FALSE}
 library(knitr)
 # opts_knit$set(out.format = "latex")
-knit_theme$set(knit_theme$get("greyscale0"))
+#knit_theme$set(knit_theme$get("greyscale0"))
 
-# options(replace.assign=FALSE,width=50)
+options(replace.assign=FALSE,width=50)
 
-# opts_chunk$set(fig.path='figure/graphics-', 
-#                cache.path='cache/graphics-', 
-#                dev='pdf', fig.width=5, fig.height=5, 
-#               cache=FALSE)
-# knit_hooks$set(crop=hook_pdfcrop)
-
-# figure referencing hack
+opts_chunk$set(fig.path='figure/graphics-', 
+               cache.path='cache/graphics-', 
+               fig.align='center', 
+               dev='pdf', fig.width=5, fig.height=5, 
+               fig.show='hold', cache=FALSE, par=TRUE)
+knit_hooks$set(crop=hook_pdfcrop)
+suppressPackageStartupMessages(library(dplyr))
 fig <- local({
     i <- 0
     ref <- list()
@@ -62,25 +62,6 @@ data(movies, package = "ggplot2movies")
     mean(movies$length)
     median(movies$length)
     ```
-    
-(1) How many Action films are there in the data? (There is a 1 in the action column if it is an action film)
-
-    ```{r}
-    table(movies$Action)
-    ```
-
-(1) You can use `table()` on more than one column at once by just adding extra columns as arguments. For example `table(movies$mpaa, movies$Action)` would tell me how many action and non action films there are for each of the mpaa ratings. How many romantic comedy films are there? i.e a 1 in the Romance column and a 1 in the Comedy column?
-
-    ```{r}
-    table(movies$Romance, movies$Comedy)
-    ```
-
-(1) When the values are similar in each variable in the table, it can be difficult to tell which dimension (rows or columns) corresponds to which variable. To aid this there is an argument to the `table()` function, `dnn` which allows us to provide a vector of names. Try 
-
-    ```{r, echo=TRUE}
-    table(movies$Romance, movies$Comedy, dnn = c("Romance","Comedy"))
-    ```
-
 
 (1) What year is the oldest film in the data set from?
 
@@ -99,26 +80,23 @@ data(movies, package = "ggplot2movies")
     ```{r}
     sd(movies$rating)
     ```
-
-(1) How many people cast their vote on a film on average?
+    
+(1) How many Action films are there in the data? (There is a 1 in the action column if it is an action film)
 
     ```{r}
-    mean(movies$votes)
+    table(movies$Action)
     ```
 
-(1) We have seen that `sort()` can be used to arrange values in a vector into ascending or descending order. With data frames we are often interested in being able to order the data set based on the order of one of the variables. For example, rearranging the movies data by year of release. To accomplish this we can use `order()`.  `movies[order(movies$year),]` would achieve this example. Give it a try.
 
-The following question is a little harder:
+The following question is a little harder. 
 
-(1) What is the average length of the 50 best (highest rating) films? How does this compare to the average of all films.
+What is the average length of the 50 best (highest rating) films? How does this compare to the average of all films.
 
     ```{r}
     # rearrange the data
-    movies_sorted = movies[order(movies$rating, decreasing = TRUE),]
-    # take the best 50
-    best = movies_sorted[1:50,]
+    best = sort(movies$rating)[1:50]
     # calculate average length
-    mean(best$length)
+    mean(best)
     # compared to overall average length
     mean(movies$length)
     # perhaps surprisingly 30 mins shorter average for the best films
@@ -132,3 +110,23 @@ Solutions to the practical questions are contained within the package
 ```{r, eval= FALSE, echo = TRUE}
 vignette("solutions2", package = "jrIntroduction")
 ```
+
+
+
+
+<!-- (1) You can use `table()` on more than one column at once by just adding extra columns as arguments. For example `table(movies$mpaa, movies$Action)` would tell me how many action and non action films there are for each of the mpaa ratings. How many romantic comedy films are there? i.e a 1 in the Romance column and a 1 in the Comedy column? -->
+
+<!--     ```{r} -->
+<!--     table(movies$Romance, movies$Comedy) -->
+<!--     ``` -->
+
+<!-- (1) When the values are similar in each variable in the table, it can be difficult to tell which dimension (rows or columns) corresponds to which variable. To aid this there is an argument to the `table()` function, `dnn` which allows us to provide a vector of names. Try  -->
+
+<!--     ```{r, echo=TRUE} -->
+<!--     table(movies$Romance, movies$Comedy, dnn = c("Romance","Comedy")) -->
+<!--     ``` -->
+<!-- (1) How many people cast their vote on a film on average? -->
+
+<!--     ```{r} -->
+<!--     mean(movies$votes) -->
+<!--     ``` -->
