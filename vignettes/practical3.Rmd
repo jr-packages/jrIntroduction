@@ -6,19 +6,17 @@ output:
     latex_engine: xelatex
     fig_width: 4
     fig_height: 4
-tufte::tufte_html: default
+  tufte::tufte_html: default
 vignette: >
   %\VignetteIndexEntry{Practical 3}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
 
-
 ```{r include = FALSE}
 library(tufte)
-knitr::opts_chunk$set(results = "hide", echo = FALSE)
+knitr::opts_chunk$set(results = "hide", echo = FALSE, cache=FALSE)
 ```
-
 
 ```{r child = 'practical3_contents.Rmd'}
 ```

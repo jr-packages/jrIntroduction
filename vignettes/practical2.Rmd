@@ -13,13 +13,16 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-
 ```{r include = FALSE}
 library(tufte)
 knitr::opts_chunk$set(results = "hide", echo = FALSE, cache = FALSE)
-
-
 ```
 
 ```{r child = 'practical2_contents.Rmd'}
+```
+
+## Solutions
+
+```{r, eval= FALSE, echo = TRUE}
+vignette("solutions2", package = "jrIntroduction")
 ```
