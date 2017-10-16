@@ -88,9 +88,7 @@ data(movies, package = "ggplot2movies")
     ```
 
 
-The following question is a little harder. 
-
-What is the average length of the 50 best (highest rating) films? How does this compare to the average of all films.
+(1) What is the average length of the 50 best (highest rating) films? How does this compare to the average of all films.
 
     ```{r}
     # rearrange the data
