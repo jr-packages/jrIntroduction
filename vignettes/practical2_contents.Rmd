@@ -87,20 +87,6 @@ data(movies, package = "ggplot2movies")
     table(movies$Action)
     ```
 
-
-(1) What is the average length of the 50 best (highest rating) films? How does this compare to the average of all films.
-
-    ```{r}
-    # rearrange the data
-    best = sort(movies$rating)[1:50]
-    # calculate average length
-    mean(best)
-    # compared to overall average length
-    mean(movies$length)
-    # perhaps surprisingly 30 mins shorter average for the best films
-    ```
-
-
 # Solutions
 
 Solutions to the practical questions are contained within the package
