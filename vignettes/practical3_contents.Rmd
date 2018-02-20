@@ -192,10 +192,10 @@ The data frame `USnames` is a collection of names given to babies born in the US
 
     ```{r}
     females = USnames[USnames$Gender == "F",]
-    nrow(females)
+    sum(females$Count)
     males = USnames[USnames$Gender == "M",]
-    nrow(males)
-    ## more females
+    sum(males$Count)
+    ## more males
     ```
 
 (1) How many names were used less than 10 times?
