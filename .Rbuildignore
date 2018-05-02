@@ -2,3 +2,6 @@
 ^\.Rproj\.user$
 .travis.yml
 Makefile
+^appveyor\.yml$
+deploy.sh
+travis-tool.sh.cmd
