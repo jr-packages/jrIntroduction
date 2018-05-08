@@ -50,8 +50,7 @@ artifacts:
     name: Bits
 
 on_success:
-  - set travis=false
-  - wget --no-check-certificate https://raw.githubusercontent.com/jr-packages/drat/master/deploy.sh
+  - wget --no-check-certificate https://raw.githubusercontent.com/jr-packages-windows/drat/master/deploy.sh
   - bash deploy.sh
 
 
