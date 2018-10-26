@@ -4,4 +4,6 @@
 Makefile
 ^README\.Rmd$
 ^README-.*\.png$
-README.Rmd
+^appveyor\.yml$
+deploy.sh
+travis-tool.sh.cmd
