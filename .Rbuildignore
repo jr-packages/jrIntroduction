@@ -2,3 +2,6 @@
 ^\.Rproj\.user$
 .travis.yml
 Makefile
+^README\.Rmd$
+^README-.*\.png$
+README.Rmd
