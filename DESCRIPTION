@@ -1,7 +1,7 @@
 Package: jrIntroduction
 Type: Package
 Title: Jumping Rivers: Introduction to R
-Version: 0.1.11
+Version: 0.1.2
 Authors@R: c(person("Jamie", "Owen", email="jamie@jumpingrivers.com", role = c("aut", "cre")),
               person("Colin", "Gillespie", email="colin@jumpingrivers.com", role = "aut"))
 Description: Practicals and data sets for the Introduction to R course run by Jumping
