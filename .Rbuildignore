@@ -2,6 +2,8 @@
 ^\.Rproj\.user$
 .travis.yml
 Makefile
+^README\.Rmd$
+^README-.*\.png$
 ^appveyor\.yml$
 deploy.sh
 travis-tool.sh.cmd

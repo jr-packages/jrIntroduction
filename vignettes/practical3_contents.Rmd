@@ -198,9 +198,9 @@ The data frame `USnames` is a collection of names given to babies born in the US
     ## more males
     ```
 
-(1) How many names were used less than 10 times?
+(1) How many names in 2011 were used less than 10 times?
 
     ```{r}
-    nrow(USnames[USnames$Count < 10, ])
+    nrow(USnames[USnames$Year == 2011 & USnames$Count < 10,])
     ```
 
