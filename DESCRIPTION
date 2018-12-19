@@ -6,10 +6,10 @@ Authors@R: c(person("Jamie", "Owen", email="jamie@jumpingrivers.com", role = c("
               person("Colin", "Gillespie", email="colin@jumpingrivers.com", role = "aut"))
 Description: Practicals and data sets for the Introduction to R course run by Jumping
   Rivers.
-URL: http://www.jumpingrivers.com/
+URL: https://www.jumpingrivers.com/
 License: GPL-3
 Depends:
-    R (>= 3.2.0), 
+    R (>= 3.2.0)
 Imports:
     ggplot2movies, dplyr (>= 0.7.0), readr, readxl, jrData
 Remotes:
@@ -17,3 +17,4 @@ Remotes:
 Suggests:
     knitr, tufte, rmarkdown, formatR
 VignetteBuilder: knitr
+RoxygenNote: 6.1.1

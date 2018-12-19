@@ -4,7 +4,7 @@
 #'
 #' @name names
 #' @docType data
-#' @usage data(names)
+#' @usage data(names, package = "jrIntroduction")
 #' @return A named vector
 #' @keywords datasets
 #' @examples

@@ -5,7 +5,7 @@
 \alias{names}
 \title{Names data}
 \usage{
-data(names)
+data(names, package = "jrIntroduction")
 }
 \value{
 A named vector
