@@ -19,8 +19,8 @@ environment:
   - R_VERSION: stable
 
 build_script:
-  - travis-tool.sh install_deps
   - travis-tool.sh install_github jr-packages/jrData
+  - travis-tool.sh install_deps
   - travis-tool.sh r_install drat
 
 test_script:
