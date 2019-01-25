@@ -18,7 +18,7 @@ environment:
   - R_VERSION: 3.4.4
   - R_VERSION: stable
 
-before_build:
+before_script:
   - travis-tool.sh install_github jr-packages/jrData
 
 build_script:
