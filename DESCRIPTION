@@ -13,6 +13,6 @@ Depends:
 Imports:
     ggplot2movies, dplyr (>= 0.7.0), readr, readxl
 Suggests:
-    knitr, tufte, rmarkdown, formatR
+    knitr, tufte, rmarkdown, formatR, testthat, lintr
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1

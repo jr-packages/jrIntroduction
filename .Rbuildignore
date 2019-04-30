@@ -7,3 +7,4 @@ Makefile
 ^appveyor\.yml$
 deploy.sh
 travis-tool.sh.cmd
+^.lintr$

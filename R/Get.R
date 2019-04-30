@@ -20,7 +20,7 @@ GetNumericVector = function(seed=1){
 GetLogicalVector = function(seed=1){
   set.seed(seed)
   l = sample(52000:60000, 1)
-  v = sample(c(TRUE, FALSE), l, replace=TRUE)
+  v = sample(c(TRUE, FALSE), l, replace = TRUE)
   return(v)
 }
 
@@ -29,6 +29,6 @@ GetLogicalVector = function(seed=1){
 GetCharacterVector = function(seed=1){
   set.seed(seed)
   l = sample(51000:60000, 1)
-  v = sample(LETTERS, l, replace=TRUE)
+  v = sample(LETTERS, l, replace = TRUE)
   return(v)
 }

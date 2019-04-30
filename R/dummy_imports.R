@@ -1,2 +1,2 @@
-#' @import dplyr readr ggplot2movies readxl jrData
+#' @import dplyr readr ggplot2movies readxl
 NULL

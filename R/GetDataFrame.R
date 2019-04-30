@@ -19,7 +19,7 @@ GetDataFrame = function(seed=1) {
   l = sample(50:100, 1)
   del_rows = sample(1:nrow(d), l)
 
-  d = d[-del_rows,]
+  d = d[-del_rows, ]
   rownames(d) = 1:nrow(d)
 
   return(d)
