@@ -3,6 +3,8 @@ cache: packages
 
 notifications:
   email:
+  	recipients:
+  	  - alerts@jumpingrivers.support
     on_success: change
     on_failure: change
 
