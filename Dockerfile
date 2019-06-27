@@ -1,3 +1,6 @@
 FROM jrpackages/jrnotes
 
-RUN R -e "remotes::install_github('jr-packages/jrIntroduction', dependencies = TRUE)"
+ARG jr_pkg=jrIntroduction
+
+RUN RUN install2.r -n -1 -d TRUE -l /rpackages/ --error $jr_pkg \
+    && rm -rf /tmp/downloaded_packages/
