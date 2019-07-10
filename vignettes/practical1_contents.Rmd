@@ -1,20 +1,3 @@
-```{r, include = FALSE, cache = FALSE}
-library(knitr)
-# opts_knit$set(out.format = "latex")
-knit_theme$set(knit_theme$get("greyscale0"))
-
-options(replace.assign=FALSE,width=50)
-
-opts_chunk$set(fig.path='figure/graphics-', 
-               cache.path='cache/graphics-', 
-               fig.align='center', 
-               dev='pdf', fig.width=5, fig.height=5, 
-               fig.show='hold', cache=FALSE, par=TRUE)
-knit_hooks$set(crop=hook_pdfcrop)
-suppressPackageStartupMessages(library(dplyr))
-```
-
-
 # Getting Started
 
 ## Start a new script file
