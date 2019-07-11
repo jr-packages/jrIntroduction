@@ -3,15 +3,25 @@
 \docType{data}
 \name{movies}
 \alias{movies}
-\alias{Budget}
-\alias{Length}
-\alias{sub_movies}
 \title{Movie information and user ratings from IMDB.com.}
 \usage{
 data(movies)
 }
 \value{
-A data frame with 4848 rows and 24 variables.
+A data frame with 3658 rows and 21 variables.
+\describe{
+\item{title.}{Title of the movie.}
+\item{year.}{Year of release.}
+\item{budget.}{Total budget (if known) in US dollars}
+\item{gross.}{Grossed amount in US dollars}
+\item{duration}{Duration in minutes.}
+\item{classification}{PG, 12A, etc}
+\item{rating.}{Average IMDB user rating.}
+\item{votes.}{Number of IMDB users who rated this movie.}
+\item{language}{Original language of the film}
+\item{country}{Country of release}
+\item{cast_total_facebook_likes}{Total number of facebook likes of the cast}
+\item{action, adventure, comedy, crime, drama, fantasy, sci-fi, thriller, romance, other}{Binary variables representing if movie was classified as belonging to that genre.}}
 }
 \description{
 The internet movie database, \url{http://imdb.com}, is a
@@ -20,30 +30,16 @@ studios and fans.
 }
 \details{
 It claims to be the biggest movie database on the web
-and is run by  amazon.  More about information
+and is run by amazon.  More about information
 \url{imdb.com }can be found online,
 \url{http://imdb.com/help/show_leaf?about}, including
 information about the data collection process,
 \url{http://imdb.com/help/show_leaf?infosource}.
 }
-\note{
-Movies were selected for inclusion if they had a known length, had been rated by at least one imdb user and had an mpaa rating. The  data set contains the following fields:
-\describe{
-\item{title.}{Title of the movie.}
-\item{year.}{Year of release.}
-\item{budget.}{Total budget (if known) in US dollars}
-\item{length.}{Length in minutes.}
-\item{rating.}{Average IMDB user rating.}
-\item{votes.}{Number of IMDB users who rated this movie.}
-\item{r1-10.}{Multiplying by ten gives percentile (to nearest 10\%) of users who rated this movie a 1.}
-\item{mpaa.}{MPAA rating.}
-\item{action, animation, comedy, drama, documentary, romance, short.}{Binary variables representing if movie was classified as belonging to that genre.}}
-}
 \examples{
 data(movies)
 }
 \references{
-Credit: This data set was initially constructed by
-Hadley Wickham.
+Credit: This data set was found of kaggle
 }
 \keyword{datasets}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetDataFrame.R
 \name{GetDataFrame}
 \alias{GetDataFrame}
-\title{Subset of the yeast data set}
+\title{Subset of the movies data set}
 \usage{
 GetDataFrame(seed = 1)
 }
@@ -14,7 +14,7 @@ A data frame with a random numer of rows
 }
 \description{
 This function creates a subset (of random rows) of the
-yeast data set data frame.
+movies data set data frame.
 The seed argument resets the random number generator.
 }
 \examples{

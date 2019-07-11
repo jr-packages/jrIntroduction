@@ -1,47 +1,23 @@
-```{r, include = FALSE, cache = FALSE}
-library(knitr)
-# opts_knit$set(out.format = "latex")
-#knit_theme$set(knit_theme$get("greyscale0"))
-
-options(replace.assign=FALSE,width=50)
-
-opts_chunk$set(fig.path='figure/graphics-', 
-               cache.path='cache/graphics-', 
-               fig.align='center', 
-               dev='pdf', fig.width=5, fig.height=5, 
-               fig.show='hold', cache=FALSE, par=TRUE)
-knit_hooks$set(crop=hook_pdfcrop)
-suppressPackageStartupMessages(library(dplyr))
-fig <- local({
-    i <- 0
-    ref <- list()
-    list(
-        cap=function(refName, text) {
-            i <<- i + 1
-            ref[[refName]] <<- paste0("Figure ",i)
-            paste("Figure ", i, ": ", text, sep="")
-        },
-        ref=function(refName) {
-            ref[[refName]]
-        })
-})
-
-# usage 
-# chunk options fig.cap = fig$cap(<label>, <caption>)
-# reference `r fig$ref(<label>)`
-```
-
 ## A suggestion
 
 This is just a suggestion to try and help get you into "good habits" early. If I was sitting to take this practical now, I would start a new R script file. That way all of the work that you have done associated with today's course is in one place, and the code for each of the practicals is separate from one another. This might feel a bit tedious right now, but as the amount of code you write and number of projects you take part in increases it will pay off to have a structured workflow. 
 
 
-# Data frames 
+# Tibbles 
 
-For this set of questions we will use the movies data from the IMDB database. This data is contained in a package called `ggplot2movies`. To load the data into your current session you can use
+For this set of questions we will use the movies data from the IMDB database. However, to give you some practice at reading in your own data, we're going to get you to read it in. 
 
-```{r, echo=TRUE}
-data(movies, package = "ggplot2movies")
+```{r, eval = FALSE}
+library("jrIntroduction")
+GetCSVMovies()
+```
+
+This will load a file called `movies.csv` into your current working directory. Use **readr** and `read_csv()` to read this file in. If the `GetCSVMovies()` function doesn't work for you, then just use the `data()` command from the notes as it is the same data.
+```{r, eval = FALSE}
+movies = read_csv("movies.csv")
+```
+```{r, echo = FALSE, message = FALSE}
+data(movies, package = "jrIntroduction")
 ```
 
 (1)  Use the `head()` function to inspect the top of the data, this can help give you a feel for what the data looks like and what variables are contained within the data?
@@ -59,8 +35,8 @@ data(movies, package = "ggplot2movies")
 (1) Recall that if I want to pull out a single column, or variable, from a data frame we can use `$`. To extract the titles from this data set we write `movies$title`.^[If you can't remember what the names of the columns are, you can use `colnames(movies)` to find out.] Using `mean()` and `median()` calculate these summary statistics for the film lengths
 
     ```{r}
-    mean(movies$length)
-    median(movies$length)
+    mean(movies$duration)
+    median(movies$duration)
     ```
 
 (1) What year is the oldest film in the data set from?
@@ -72,7 +48,7 @@ data(movies, package = "ggplot2movies")
 (1) How long is the longest film?
 
     ```{r}
-    max(movies$length)
+    max(movies$duration)
     ```
 
 (1) What is the standard deviation of the film ratings?
@@ -81,10 +57,15 @@ data(movies, package = "ggplot2movies")
     sd(movies$rating)
     ```
     
-(1) How many Action films are there in the data? (There is a 1 in the action column if it is an action film)
+(1) Try running the following code
 
-    ```{r}
-    table(movies$Action)
+    ```{r, echo = TRUE, eval = FALSE}
+    table(movies$action)
+    ```
+    What do you think is happening?
+    
+    ```{r, eval = FALSE}
+    # Counting up the categories within a vector
     ```
 
 # Solutions
