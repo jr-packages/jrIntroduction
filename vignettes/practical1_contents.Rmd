@@ -82,37 +82,37 @@ This code generates a large vector of random numbers such that everyone has the 
     sum(x1)
     ```
 
-## Bonus questions
+<!-- ## Bonus questions -->
 
-  
-The following code will load a data set into your current session which contains a vector of frequencies of names of babies born in the US in 2000.
 
-```{r, echo = TRUE}
-data(names, package = "jrIntroduction")
-```
+<!-- The following code will load a data set into your current session which contains a vector of frequencies of names of babies born in the US in 2000. -->
 
-The vector loaded into the session is called `names` and is the subject of the following questions
+<!-- ```{r, echo = TRUE} -->
+<!-- data(names, package = "jrIntroduction") -->
+<!-- ``` -->
 
-  (1)  How many babies were named John?
-  
-    ```{r}
-    names["John"]
-    ```
-  
-  (1) How many children are in this data set?
-  
-    ```{r}
-    sum(names)
-    ```
-  
-  (1) What was the most common name that year?
-  
-    ```{r}
-    sort(names, decreasing = TRUE)[1]
-    ## We haven't seen this function yet 
-    ## but you could also use
-    names[which.max(names)]
-    ```
+<!-- The vector loaded into the session is called `names` and is the subject of the following questions -->
+
+<!--   (1)  How many babies were named John? -->
+
+<!--     ```{r} -->
+<!--     names["John"] -->
+<!--     ``` -->
+
+<!--   (1) How many children are in this data set? -->
+
+<!--     ```{r} -->
+<!--     sum(names) -->
+<!--     ``` -->
+
+<!--   (1) What was the most common name that year? -->
+
+<!--     ```{r} -->
+<!--     sort(names, decreasing = TRUE)[1] -->
+<!--     ## We haven't seen this function yet  -->
+<!--     ## but you could also use -->
+<!--     names[which.max(names)] -->
+<!--     ``` -->
 
 # Solutions
 
