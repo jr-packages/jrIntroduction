@@ -1,0 +1,268 @@
+---
+title: "Base graphics"
+author: "Jumping Rivers"
+output:
+  tufte::tufte_handout:
+    latex_engine: xelatex
+    fig_width: 4
+    fig_height: 4
+  tufte::tufte_html: default
+vignette: >
+  %\VignetteIndexEntry{Base graphics}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+# Base Graphics
+
+<!-- # Base graphics -->
+
+<!-- ####################################### -->
+<!-- ####### Base graphics ################# -->
+<!-- ####################################### -->
+```{r moviesscatter, echo = FALSE, fig.margin = TRUE, fig.cap='A scatter plot of movie length against budget.', fig.height=7, fig.width=4, cache=FALSE}
+data(movies, package = "ggplot2movies")
+sub_movies = movies[1:500, ]
+
+op = par(mfrow = c(2, 1), mar = c(3, 3, 3, 1))
+plot(sub_movies$length, sub_movies$rating)
+text(0, 8.5, "(a)")
+
+plot(sub_movies$length, sub_movies$rating,
+     ylab = "Rating", xlab = "Movie Length",
+     ylim = c(0, 10), xlim = c(0, 250),
+     pch = 21, bg = sub_movies$Action + 1,
+     panel.first = grid(), cex = 0.7)
+text(0, 9.45, "(b)")
+par(op)
+```
+
+## The standard plot
+
+The standard plotting command in R is `plot()`. It takes two coordinate
+arguments: `plot(x, y)`.^[Actually, you can just type `plot(y)`
+  and it will generate a default for the x-axis] For example,
+
+```{r, fig.keep="none"}
+data(movies, package = "ggplot2movies")
+sub_movies = movies[1:500, ]
+## Plot first 500 movies
+plot(sub_movies$length, sub_movies$rating)
+```
+
+gives figure \@ref(fig:moviesscatter) a. The basic `plot` command has multiple
+arguments:
+
+* `main`, `xlab` and `ylab` control the axis labels.
+* `xlim` and `ylim` control the axis ranges.
+* `lwd` controls the thickness of the lines.
+* `lty` specifies the line type, e.g. dotted lines.
+* `type = 'p'` - draws points.
+* `type = 'l'` - draws lines.
+* `type = 'b'` - draws lines and points.
+* `type = 'o'` - draws lines and points over-plotted.
+* `log = 'y'` - use the log scale on the `y` (or `x`) axis.
+
+Using the default settings is fine for investigating data, but we
+often have to set limits and colours explicitly:
+
+```{r, fig.keep="none"}
+plot(sub_movies$length, sub_movies$rating,
+     ylab = "Rating", xlab = "Movie Length",
+     ylim = c(0, 10), xlim = c(0, 250),
+     pch = 21, bg = sub_movies$Action + 1,
+     panel.first = grid(), cex = 0.7)
+```
+
+ to get figure \@ref(fig:moviesscatter) b. To add lines, we use the `lines()`
+function. Horizontal and vertical lines can be added using the convenience function `abline()`, viz.
+
+```{r, eval = FALSE}
+## Add a horizontal line at the origin
+abline(h = 0)
+## Vertical line
+abline(v = 1)
+```
+
+and plain text is added using the `text()` function:
+
+```{r, eval = FALSE}
+## Adds "(b)" to (0, 9.3) on the plot
+text(0, 9.3, "(b)")
+```
+
+## Bar charts
+
+The most useful way to display qualitative data is usually with a bar chart. The
+length of each bar is equal to the frequency of the corresponding value
+of the variable in the sample of data. Note that the widths of the bars should
+be equal to avoid giving a false impression.
+
+Figure \@ref(fig:moviesbarchart) shows the breakdown in MPAA ratings for the movie data set. To
+create a bar chart in R we use the following commands:
+
+```{r moviesbarchart, fig.margin = TRUE, fig.cap="Barchart of the MPAA ratings for films.", echo = 2, fig.height=3.5}
+op = par(mgp = c(2.5, 0.5, 0), mar = c(3.5, 3.5, 2, 1))
+barplot(table(movies$mpaa), xlab = "MPAA Rating",
+        ylab = "Frequency", border = "black")
+par(op)
+```
+
+
+## Histograms
+```{r movieshist, fig.margin = TRUE, fig.cap ='Histograms of the film ratings and budgets.', echo = 2:3, fig.width = 4, fig.height  = 7}
+op = par(mfrow = c(2, 1), mar = c(3, 3, 3, 1))
+hist(movies$rating, col = "grey", main = "User rating",
+     freq = TRUE, xlim = c(1, 10), xlab = "Rating")
+hist(movies$budget, col = "grey", main = "Film budget",
+     freq = FALSE, xlab = "Budget")
+par(op)
+```
+
+To represent the distribution of a sample of values of a continuous variable we
+can use a histogram. The range of values of the variable is divided into
+intervals, known as *classes*, and the frequencies in classes are
+represented by columns. As the variable is continuous, there are no gaps between
+neighbouring columns, unlike a bar chart. Note also that, strictly speaking, it
+is the *area* of the column which is equal to the frequency, not the
+height. The reason for this is that columns need not be of the same width.
+Computer software tends to use columns of the same width. However this default
+can be overridden in R if you really want to. Figure \@ref(fig:movieshist) shows histograms
+of film ratings and budgets.
+
+\indent To generate Figure \@ref(fig:movieshist) in R we use the following commands:
+
+```{r eval=FALSE}
+hist(movies$rating, col = "grey", main = "User rating",
+     freq = TRUE, xlim = c(1, 10), xlab = "Rating")
+hist(movies$budget, col = "grey", main = "Film budget",
+     freq = FALSE, xlab = "Budget")
+```
+
+## Box and whisker plots
+
+A box and whisker plot, sometimes called simply a boxplot, is another way to
+represent continuous data. This kind of plot is particularly useful for
+comparing two or more groups, by placing the box-plots side-by side. Figure
+\@ref(fig:moviesbox1) shows box-plots of film length for different
+categories.
+```{r moviesbox1, fig.margin=TRUE, fig.cap = 'Box and whisker plots of (a) film length and (b) film lengths split according to MPAA rating.', echo = FALSE, fig.width = 4, fig.height=7}
+op = par(mfrow = c(2, 1), mar = c(3, 3, 3, 1))
+boxplot(sub_movies$length, ylab = "Film length")
+boxplot(sub_movies$length ~ sub_movies$mpaa, ylab = "Film length")
+par(op)
+```
+
+\indent The central bar in the "box" is the sample *median*. The top and bottom of the box represent the upper and lower sample *quartiles*. Just as the median represents the 50% point of the data, the lower and upper quartiles represent the 25% and 75% points respectively. 
+
+\indent The lower whisker is drawn from the lower end of the box to the smallest value that is no smaller than 1.5IQR below the lower quartile. Similarly, the upper whisker is drawn from the middle of the upper end of the box to the largest value that is no larger than 1.5IQR above the upper quartile. Points outside the whiskers are classified as outliers.
+
+\indent To draw box and whisker plots in R, we use the `boxplot()` function. So to
+construct a boxplot of the movie lengths \@ref(fig:moviesbox1) a, we have
+
+```{r eval = FALSE, ref.label='moviesbox1', echo=2}
+```
+
+The `boxplot()` function also accepts formula notation^[Formula notation in R is of the form `response_variable ~ explanatory_variable`. It is a common construct for specifying model formulae in statistical routines with R but can also be used for Base graphics.]. For example, 
+
+```{r, eval = FALSE}
+## Formula pulling out columns from the data individually
+boxplot(sub_movies$length ~ sub_movies$mpaa)
+## Formula and data arguments, looks a bit cleaner
+boxplot(length ~ mpaa, data = sub_movies)
+```
+
+constructs box and whisker plots for each MPAA rating while
+
+```{r, eval = FALSE}
+boxplot(length ~ Action + Romance, data = sub_movies)
+```
+
+separates length conditional whether it is a romantic and/or an action
+movie.
+
+<!-- I think saving graphics from code should be a vignette from now on really -->
+
+<!-- ### Saving as a PDF -->
+
+<!-- The portable document format (PDF) is a vector file format.\marginnote{Another -->
+<!--   standard vector format is postscript. Just use the \cc{ps} function instead of -->
+<!--   the \cc{pdf} function to generate postscript files.} For many types of -->
+<!-- graphics, vector files are preferred for print. This is because the resulting -->
+<!-- output can be scaled to any size without pixelation. The size of the pdf is -->
+<!-- usually smaller than a corresponding bitmap file, except, when we are plotting -->
+<!-- hundreds of thousands of objects. For example, a scatter plot with $10^6$ -->
+<!-- points. Each point is represented by a single vector. To save a plot as a pdf, -->
+<!-- we use the \cc{pdf} function\marginnote{The function \cc{dev.off()} closes the -->
+<!--   current \textit{device}. In this case, we are using a pdf device. If you had a -->
+<!-- standard plot window open, \cc{dev.off()} would close that window.} -->
+
+<!-- <<>>= -->
+<!-- pdf("mygraph.pdf") -->
+<!-- plot(1:10) -->
+<!-- dev.off() -->
+<!-- @  -->
+
+<!--  By default, pdfs are $7\times 7$ inches. When including graphs in -->
+<!-- papers, I tend to reduce the size of the pdf, i.e.\marginnote{All the graphs in -->
+<!--   this set of notes are saved as \mbox{$6\times 6$} pdfs.} -->
+
+<!-- <<>>= -->
+<!-- ##6 by 6 inches -->
+<!-- pdf("mygraph.pdf", width=6, height=6) -->
+<!-- plot(1:10) -->
+<!-- dev.off() -->
+<!-- @  -->
+
+
+<!-- \subsection{Bitmap formats} -->
+
+<!-- JPEG, PNG and TIFF are bitmap (or raster) formats.\sidenote{Typically, I only -->
+<!--   use raster plots for scatter plots with millions of points or (perhaps) -->
+<!--   heatmap type plots.} When we magnify these formats, the pixels will eventually -->
+<!-- become visible. When you take pictures with a digital camera the images are -->
+<!-- stored using a bitmap format, because a vector representation of the image would -->
+<!-- be too large. To store a graph in a bitmap format, we use the \cc{png}, -->
+<!-- \cc{jpeg} or \cc{tiff} functions: -->
+
+<!-- <<>>= -->
+<!-- png("mygraph.png") -->
+<!-- plot(1:10) -->
+<!-- dev.off() -->
+<!-- @  -->
+
+<!--  By default, the graphs are $480\times 480$ pixels in size and have a -->
+<!-- resolution of 72 dpi.\marginnote{dpi = dots per inch.} Obviously, increasingly -->
+<!-- the resolution will increase image quality, but at a cost of file size. You can -->
+<!-- alter the resolution using the \cc{res} argument in \cc{png}. -->
+
+<!-- \subsection{Working with word} -->
+
+<!-- Some programs - Microsoft Office - cannot import PDF files, so we are forced to -->
+<!-- work with high-resolution PNG or TIFF files.\marginnote{If you have a graph for -->
+<!--   a publication, then you can typically you upload the file separately. In this -->
+<!--   case, use pdf or postscript format.} A reasonable print quality is around 300 -->
+<!-- dpi. So to make a $6 \times 6$ inch image, we use the command -->
+
+<!-- <<>>= -->
+<!-- ppi = 300 -->
+<!-- png("mygraph.png", width=6*ppi, height=6*ppi, res=ppi) -->
+<!-- plot(1:10) -->
+<!-- dev.off() -->
+<!-- @  -->
+
+<!-- \marginnote{For displaying the graphic on a screen, a dpi of around 150 is -->
+<!--   usually fine.} -->
+
+<!-- \subsection{Saving a graphic from the screen} -->
+
+<!-- If you have generated a graph using the \cc{plot} command, say, then you can -->
+<!-- save the graphic to a file using the \cc{dev.copy} command. This will save the -->
+<!-- current graph from the screen, but it re-renders it for the particular device. -->
+<!-- Hence, it may not look exactly the same unless you specify the \textbf{exact} -->
+<!-- same size in pixels. -->
+
+
+<!-- ```{r fig.cap='http://xkcd.com/833/', fig.pos="b", echo = FALSE, out.width = "0.8\\textwidth"} -->
+<!-- knitr::include_graphics("../graphics/convincing.png") -->
+<!-- ``` -->
