@@ -1,4 +1,4 @@
-# Base Graphics
+# ggplot2
 
 We will continue to investigate the movies data from earlier. Make sure that you have the data loaded into the session as part of your new script (if you started one) and the package loaded.
 
@@ -27,7 +27,7 @@ g = ggplot(movies, aes(x = votes, y = rating)) +
 (1) The range of possible ratings is between 0 and 10, however because the maximum rating is below 10 the y-axis stops before 10. We can change the axis range using the `ylim` function. For instance, if our graph was stored in an object `g`, we could change the y-axis limit to (0,10) like so 
 
     ```{r, eval = FALSE}
-    g + ylim(0,10)
+    g + ylim(0, 10)
     ```
     
 Do this to your graph.

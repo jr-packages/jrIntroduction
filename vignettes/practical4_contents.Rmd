@@ -4,7 +4,7 @@ This section will hopefully help you get more comfortable with some of the `dply
 
 ```{r, message = FALSE, warning=FALSE}
 library(dplyr)
-data("movies",package = "ggplot2movies")
+data("movies", package = "jrIntroduction")
 ```
 
 
@@ -21,7 +21,7 @@ data("movies",package = "ggplot2movies")
     ```{r, eval = FALSE}
     movies %>% 
       filter(!is.na(budget)) %>%
-      group_by(year,Comedy)
+      group_by(year, comedy)
     ```
 
 (1) Use `summarise()` to calculate the average budget in each year for both comedy and non comedy films. When you do name the new column of averages `b` and store the final output data as a variable called `plotdat`
@@ -29,7 +29,7 @@ data("movies",package = "ggplot2movies")
     ```{r}
     plotdat = movies %>% 
       filter(!is.na(budget)) %>%
-      group_by(year,Comedy) %>%
+      group_by(year, comedy) %>%
       summarise(b = mean(budget))
     ```
     
