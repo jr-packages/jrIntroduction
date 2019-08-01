@@ -1,12 +1,11 @@
-# Data manipulation 
+# Data Manipulation 
 
-This section will hopefully help you get more comfortable with some of the `dplyr` functionality for "wrangling" your data. We will do some data wrangling and the use that to create some plots. Make sure you load in the `dplyr` package and the `movies` data set.
+This section will hopefully help you get more comfortable with some of the __dplyr__ functionality for "wrangling" your data. We will do some data wrangling and the use that to create some plots. Make sure you load in the __dplyr__ package and the `movies` data set.
 
 ```{r, message = FALSE, warning=FALSE}
 library(dplyr)
 data("movies", package = "jrIntroduction")
 ```
-
 
 (1) We want to look at how film budgets have changed over time for both the Comedy and non Comedy films. To start with, since there are missing values `NA` for films where we didn't know the budget, there could be complications for calculating averages and plots. We can use the `is.na()` function to find such values. Use the `filter()` function to remove them, try using the `%>%` operator notation if you like, `movies %>% filter(!is.na(...))`
 
@@ -14,7 +13,6 @@ data("movies", package = "jrIntroduction")
     movies %>%
       filter(!is.na(budget))
     ```
-
 
 (1) We want to look at comedy and non comedy films in each year, this is some sort of grouping structure which suggests use of the `group_by()` function. Create this grouping structure on the filtered movies data
 
@@ -24,10 +22,10 @@ data("movies", package = "jrIntroduction")
       group_by(year, comedy)
     ```
 
-(1) Use `summarise()` to calculate the average budget in each year for both comedy and non comedy films. When you do name the new column of averages `b` and store the final output data as a variable called `plotdat`
+(1) Use `summarise()` to calculate the average budget in each year for both comedy and non comedy films.
 
     ```{r}
-    plotdat = movies %>% 
+    movies %>% 
       filter(!is.na(budget)) %>%
       group_by(year, comedy) %>%
       summarise(b = mean(budget))
@@ -51,19 +49,13 @@ The data frame `USnames` is a collection of names given to babies born in the US
     ```
 
 
-(1) Create a subset of those born in 2012, i.e `Year == 2012` called `y`.
+(1) How many children where born in 2012? Hint: use `filter()` then `summarise()`
 
     ```{r}
-    y = filter(USnames, Year == 2012)
+    filter(USnames, Year == 2012) %>%  summarise(sum(Count))
     ```
 
-(1) What is the total number of children born in this year?
-
-    ```{r}
-    summarise(y, sum(Count))
-    ```
-
-(1) Were more male or females children born during the 4 years?
+(1) Were more male or females children born during the 4 years? Hint: use `group_by()`
 
     ```{r}
     USnames %>%
@@ -72,76 +64,10 @@ The data frame `USnames` is a collection of names given to babies born in the US
     ## more males
     ```
 
-(1) How many names in 2011 were used less than 10 times?
+(1) Tricky: How many names in 2011 were used less than 10 times?
 
     ```{r}
     USnames %>% 
       filter(Year == 2011 & Count < 10) %>% 
-      nrow()
+      count()
     ```
-
-<!-- (1) We could now create a line plot for the non comedy movies using^[Here we are using the formula notation for plots, refer back to the plotting section of the notes if you are unsure.] -->
-
-<!-- ```{r, echo=FALSE, eval = TRUE} -->
-<!-- non_comedy = plotdat %>%  -->
-<!--       filter(Comedy == 0) -->
-<!-- ``` -->
-
-
-<!--     ```{r, echo = TRUE, eval = FALSE} -->
-<!--     non_comedy = plotdat %>%  -->
-<!--       filter(Comedy == 0) -->
-<!--     plot(b~year, data = non_comedy, type = "l",  -->
-<!--          ylab = "Average Budget") -->
-<!--     ``` -->
-
-<!-- (1) Use `lines()` to add the corresponding line for the comedy films to be able to compare how the average budgets for each film type compares over time. -->
-
-<!-- ```{r, eval = TRUE, echo = FALSE} -->
-<!-- comedy = plotdat %>%  -->
-<!--       filter(Comedy == 1) -->
-<!-- ``` -->
-
-<!--     ```{r, eval = FALSE} -->
-<!--     comedy = plotdat %>%  -->
-<!--       filter(Comedy == 1) -->
-<!--     lines(b~year, data = comedy, col = 2) -->
-<!--     ``` -->
-
-<!-- (1) Similarly create a data set which calculates the average rating for different film lengths for both comedy and non comedy films -->
-<!-- called `films` -->
-
-<!--     ```{r} -->
-<!--     films = movies %>% -->
-<!--       group_by(length,Comedy) %>% -->
-<!--       summarise(r = mean(rating)) -->
-<!--     ``` -->
-
-<!-- (1) We could then plot the average rating against length for the non comedy films using the code below. In my data the average ratings column is called `r` -->
-
-<!-- ```{r, eval=TRUE, echo = FALSE} -->
-<!-- non_films = films %>% -->
-<!--            filter(Comedy == 0) -->
-<!-- ``` -->
-
-
-<!--     ```{r, echo = TRUE, eval = FALSE} -->
-<!--     non_films = films %>% -->
-<!--            filter(Comedy == 0) -->
-<!--     plot(r ~ length, data = non_films, pch = 19, -->
-<!--          ylab = "Average Rating") -->
-<!--     ``` -->
-
-<!-- (1) Add the points for the Comedy films in red using the `points()` function -->
-
-<!-- ```{r, echo = FALSE} -->
-<!-- com_films = films %>%  -->
-<!--       filter(Comedy == 1) -->
-<!-- ``` -->
-
-
-<!--     ```{r, eval = FALSE} -->
-<!--     com_films = films %>%  -->
-<!--       filter(Comedy == 1) -->
-<!--     points(r~length, data = com_films, pch = 19, col = 2) -->
-<!--     ``` -->

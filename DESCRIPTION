@@ -1,19 +1,34 @@
-Package: jrIntroduction
 Type: Package
+Package: jrIntroduction
 Title: Jumping Rivers: Introduction to R
 Version: 1.0.0
-Authors@R: c(person("Jamie", "Owen", email="jamie@jumpingrivers.com", role = c("aut", "cre")),
-              person("Colin", "Gillespie", email="colin@jumpingrivers.com", role = "aut"))
-Description: Practicals and data sets for the Introduction to R course run by Jumping
-  Rivers.
-URL: https://www.jumpingrivers.com/
+Authors@R: 
+    person(given = "Jumping",
+           family = "Rivers",
+           role = c("aut", "cre"),
+           email = "training@jumpingrivers.com")
+Description: Practicals and data sets for the Introduction to R
+    course run by Jumping Rivers.
 License: GPL-3
+URL: https://www.jumpingrivers.com/
 Depends:
     R (>= 3.2.0)
 Imports:
-    ggplot2movies, dplyr (>= 0.7.0), readr, readxl, ggplot2
+    dplyr (>= 0.7.0),
+    ggplot2,
+    ggplot2movies,
+    readr,
+    readxl
 Suggests:
-    knitr, tufte, rmarkdown, formatR, testthat, lintr, hrbrthemes, gridExtra
-VignetteBuilder: knitr
+    formatR,
+    gridExtra,
+    hrbrthemes,
+    knitr,
+    lintr,
+    rmarkdown,
+    testthat,
+    tufte
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
 RoxygenNote: 6.1.1

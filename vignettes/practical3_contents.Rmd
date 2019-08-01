@@ -24,13 +24,11 @@ g = ggplot(movies, aes(x = votes, y = rating)) +
              title = "No of Votes vs Average IMDB Rating")
     ```
 
-(1) The range of possible ratings is between 0 and 10, however because the maximum rating is below 10 the y-axis stops before 10. We can change the axis range using the `ylim` function. For instance, if our graph was stored in an object `g`, we could change the y-axis limit to (0,10) like so 
+(1) The range of possible ratings is between 0 and 10, however because the maximum rating is below 10 the y-axis stops before 10. We can change the axis range using the `ylim` function. For instance, if our graph was stored in an object `g`, we could change the y-axis limit to (0,10) by adding `ylim(0, 10)`. Make this change to your graph.
 
     ```{r, eval = FALSE}
     g + ylim(0, 10)
     ```
-    
-Do this to your graph.
 
 ## Histograms
 
@@ -41,13 +39,13 @@ Do this to your graph.
         geom_histogram()
     ```
     
-(1) Change the binwidth to 1 year using the `binwidth` argument in `geom_histogram()`
+(1) Change the binwidth to 1 year using the `binwidth` argument in `geom_histogram(binwidth = 1)`. Try different values of `binwidth`.
 
     ```{r, eval = FALSE}
     ggplot(movies, aes(x = year)) + 
         geom_histogram(binwidth = 1)
     ```
-    
+
 ## Bonus questions - an introduction to colours and fills
 
 Let's go back to the classification bar chart we had in the notes
