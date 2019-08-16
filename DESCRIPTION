@@ -1,7 +1,7 @@
 Type: Package
 Package: jrIntroduction
 Title: Jumping Rivers: Introduction to R
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: 
     person(given = "Jumping",
            family = "Rivers",
