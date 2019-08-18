@@ -2,7 +2,6 @@
 
 export(GetCSVMovies)
 export(GetCharacterVector)
-export(GetDataFrame)
 export(GetExcelMovies)
 export(GetLogicalVector)
 export(GetNumericVector)
