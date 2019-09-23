@@ -1,7 +1,7 @@
 Type: Package
 Package: jrIntroduction
 Title: Jumping Rivers: Introduction to R
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: 
     person(given = "Jumping",
            family = "Rivers",
@@ -18,8 +18,7 @@ Imports:
     ggplot2,
     ggplot2movies,
     readr,
-    readxl,
-    tidyr
+    readxl
 Suggests:
     formatR,
     gridExtra,
@@ -29,7 +28,8 @@ Suggests:
     rmarkdown,
     testthat,
     tufte,
-    knitr
+    tidyr,
+    lubridate
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
