@@ -7,18 +7,18 @@ library(dplyr)
 data("movies", package = "jrIntroduction")
 ```
 
-(1) We want to look at how film budgets have changed over time for both the Comedy and non Comedy films. To start with, since there are missing values `NA` for films where we didn't know the budget, there could be complications for calculating averages and plots. We can use the `is.na()` function to find such values. Use the `filter()` function to remove them, try using the `%>%` operator notation if you like, `movies %>% filter(!is.na(...))`
+(1) We want to look at how film budgets for films in English have changed over time for both the Comedy and non Comedy films. To start with, we should filter the data set such that it only contains films spoken in English. Try using the `%>%` notation, i.e. `movies %>% filter(...)`
 
     ```{r, eval = FALSE}
     movies %>%
-      filter(!is.na(budget))
+      filter(language == "English")
     ```
 
 (1) We want to look at comedy and non comedy films in each year, this is some sort of grouping structure which suggests use of the `group_by()` function. Create this grouping structure on the filtered movies data
 
     ```{r, eval = FALSE}
     movies %>% 
-      filter(!is.na(budget)) %>%
+      filter(language == "English") %>%
       group_by(year, comedy)
     ```
 
@@ -26,7 +26,7 @@ data("movies", package = "jrIntroduction")
 
     ```{r}
     movies %>% 
-      filter(!is.na(budget)) %>%
+      filter(language == "English") %>%
       group_by(year, comedy) %>%
       summarise(b = mean(budget))
     ```
@@ -49,7 +49,7 @@ The data frame `USnames` is a collection of names given to babies born in the US
     ```
 
 
-(1) How many children where born in 2012? Hint: use `filter()` then `summarise()`
+(1) How many children were born in 2012? Hint: use `filter()` then `summarise()`
 
     ```{r}
     filter(USnames, Year == 2012) %>%  summarise(sum(Count))

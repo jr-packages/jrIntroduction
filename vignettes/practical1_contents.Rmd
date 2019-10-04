@@ -46,38 +46,32 @@ x1 = GetNumericVector()
 
 This code generates a large vector of random numbers such that everyone has the same.^[This function is part of the course package `jrIntroduction`, you can view it's help page if you like `r knitr::inline_expr('?GetNumericVector()')`]
 
-  (1) How many elements are in `x1`? (i.e What is the length of `x1`)
-  
-    ```{r, indent = '  '}
+1. How many elements are in `x1`? (i.e What is the length of `x1`)
+    ```{r}
     length(x1)
     ```
 
-  (1) What is the 55^th^ element of `x1`?
-
+2. What is the 55^th^ element of `x1`?
     ```{r}
     x1[55]
     ```
 
-  (1) What is the final value in `x1`?
-
+3. What is the final value in `x1`?
     ```{r}
     x1[length(x1)]
     ```
   
-  (1) What is the 50^th^ smallest value of `x1`?
-
+4. What is the 50^th^ smallest value of `x1`?
     ```{r}
     sort(x1)[50]
     ```
     
-  (1) How many unique values are there in `x1`?
-  
+5. How many unique values are there in `x1`?
     ```{r}
     length(unique(x1))
     ```
     
-  (1) What is the total of all elements?
-  
+6. What is the total of all elements?
     ```{r}
     sum(x1)
     ```

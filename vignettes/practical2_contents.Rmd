@@ -7,7 +7,7 @@ This is just a suggestion to try and help get you into "good habits" early. If I
 
 For this set of questions we will use the movies data from the IMDB database. However, to give you some practice at reading in your own data, we're going to get you to read it in. 
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, echo = TRUE}
 library("jrIntroduction")
 GetCSVMovies()
 ```
@@ -20,50 +20,42 @@ movies = read_csv("movies.csv")
 data(movies, package = "jrIntroduction")
 ```
 
-(1)  Use the `head()` function to inspect the top of the data, this can help give you a feel for what the data looks like and what variables are contained within the data?
-
-    ```{r}
+1. Use the `head()` function to inspect the top of the data, this can help give you a feel for what the data looks like and what variables are contained within the data
+    ```{r, eval = FALSE}
     head(movies)
     ```
 
-(1) How many films and how many variables are in this data set?
-    
+2. How many films and how many variables are in this data set?
     ```{r}
     dim(movies)
     ```
 
-(1) Recall that if I want to pull out a single column, or variable, from a data frame we can use `$`. To extract the titles from this data set we write `movies$title`.^[If you can't remember what the names of the columns are, you can use `colnames(movies)` to find out.] Using `mean()` and `median()` calculate these summary statistics for the film lengths
-
+3. Recall that if I want to pull out a single column, or variable, from a data frame we can use `$`. To extract the titles from this data set we write `movies$title`.^[If you can't remember what the names of the columns are, you can use `colnames(movies)` to find out.] Using `mean()` and `median()` calculate these summary statistics for the film lengths
     ```{r}
     mean(movies$duration)
     median(movies$duration)
     ```
 
-(1) What year is the oldest film in the data set from?
-
+4. What year is the oldest film in the data set from?
     ```{r}
     min(movies$year)
     ```
 
-(1) How long is the longest film?
-
+5. How long is the longest film?
     ```{r}
     max(movies$duration)
     ```
 
-(1) What is the standard deviation of the film ratings?
-
+6. What is the standard deviation of the film ratings?
     ```{r}
     sd(movies$rating)
     ```
     
-(1) Try running the following code
-
+7. Try running the following code
     ```{r, echo = TRUE, eval = FALSE}
     table(movies$action)
     ```
     What do you think is happening?
-    
     ```{r, eval = FALSE}
     # Counting up the categories within a vector
     ```

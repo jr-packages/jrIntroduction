@@ -10,6 +10,7 @@ notifications:
 
 r_packages:
   - drat
+  - lintr
 
 before_install:
   - tlmgr install fancyvrb units
@@ -17,6 +18,11 @@ before_install:
 before_script:
   - wget https://raw.githubusercontent.com/jr-packages/drat/master/test_deploy.sh
   - bash test_deploy.sh
+
+script:
+- Rscript -e 'lintr::lint_package()'
+- Rscript -e 'if(length(lintr::lint_package()) > 0) stop("Fix lint")'
+
 
 after_success:
   - wget https://raw.githubusercontent.com/jr-packages/drat/master/deploy.sh

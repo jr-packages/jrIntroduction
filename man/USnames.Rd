@@ -11,7 +11,8 @@ data(USnames)
 A data frame
 }
 \description{
-A collection of names given to children born in the US during the years of 2011-2014
+A collection of names given to children born
+ in the US during the years of 2011-2014
 }
 \examples{
 data(walmartraw)

@@ -49,11 +49,10 @@ g = ggplot(movies, aes(x = votes, y = rating)) +
 ## Bonus questions - an introduction to colours and fills
 
 Let's go back to the classification bar chart we had in the notes
-
-    ```{r, eval = FALSE}
-    ggplot(movies, aes(x = classification)) + 
-      geom_bar()
-    ```
+```{r, eval = FALSE}
+ggplot(movies, aes(x = classification)) + 
+  geom_bar()
+```
     
 (1) Inside the `geom_bar()` function, try adding the argument `colour = "blue"`. What happens?
     ```{r, eval = FALSE}
