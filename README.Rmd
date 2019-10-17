@@ -21,7 +21,7 @@ The goal of jrIntroduction is to ...
 You can install jrIntroduction from github with:
 
 ```{r gh-installation, eval = FALSE}
-# install.packages("devtools")
+install.packages("devtools")
 devtools::install_github("jr-packages/jrIntroduction")
 ```
 

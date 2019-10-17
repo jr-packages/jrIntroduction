@@ -25,11 +25,11 @@ Suggests:
     hrbrthemes,
     knitr,
     lintr,
+    lubridate,
     rmarkdown,
     testthat,
-    tufte,
     tidyr,
-    lubridate
+    tufte
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

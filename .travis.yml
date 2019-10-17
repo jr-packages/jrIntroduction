@@ -8,19 +8,29 @@ notifications:
     on_success: change
     on_failure: change
 
+env:
+  global:
+    - ALLOWED_NOTES=1
+
 r_packages:
   - drat
-  - lintr
+
+r_github_packages:
+  - jumpingrivers/inteRgrate
 
 before_install:
-  - tlmgr install fancyvrb units
+  - sudo apt-get install -y ghostscript
 
 before_script:
   - wget https://raw.githubusercontent.com/jr-packages/drat/master/test_deploy.sh
   - bash test_deploy.sh
 
-after_script:
-- Rscript -e 'lintr::lint_package()'
+script:
+  - Rscript -e "inteRgrate::check_pkg()"
+  - Rscript -e "inteRgrate::check_r_filenames()"
+  - Rscript -e "inteRgrate::check_tidy_description()"
+  - Rscript -e "inteRgrate::check_lintr()"
+  - Rscript -e "inteRgrate::check_namespace()"
 
 
 after_success:

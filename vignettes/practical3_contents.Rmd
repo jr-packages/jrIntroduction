@@ -12,7 +12,7 @@ data(movies, package = "jrIntroduction")
 (1) Make a basic scatter plot with votes on the x axis and rating on the y axis. Remember, we use the `ggplot()` function to create a basic plot and them `geom_point()` to add points.
 
 ```{r, eval = FALSE}
-g = ggplot(movies, aes(x = votes, y = rating)) + 
+g = ggplot(movies, aes(x = votes, y = rating)) +
     geom_point()
 ```
 

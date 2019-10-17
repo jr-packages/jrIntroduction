@@ -1,4 +1,23 @@
-# jrIntroduction
-[![Build Status](https://api.travis-ci.org/jr-packages/jrIntroduction.png?branch=master)](https://travis-ci.org/jr-packages/jrIntroduction)
 
-Course material for the [Introduction to R](www.jumpingrivers.com) course. 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# jrIntroduction
+
+The goal of jrIntroduction is to …
+
+## Installation
+
+You can install jrIntroduction from github with:
+
+``` r
+install.packages("devtools")
+devtools::install_github("jr-packages/jrIntroduction")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+``` r
+## basic example code
+```
