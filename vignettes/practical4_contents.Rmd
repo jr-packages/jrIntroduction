@@ -68,6 +68,9 @@ The data frame `USnames` is a collection of names given to babies born in the US
 
     ```{r}
     USnames %>% 
-      filter(Year == 2011 & Count < 10) %>% 
+      filter(Year == 2011) %>%
+      group_by(Name) %>%
+      summarise(Count = sum(Count)) %>%
+      filter(Count < 10) %>% 
       count()
     ```
