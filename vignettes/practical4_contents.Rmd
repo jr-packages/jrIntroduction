@@ -2,8 +2,8 @@
 
 This section will hopefully help you get more comfortable with some of the __dplyr__ functionality for "wrangling" your data. We will do some data wrangling and the use that to create some plots. Make sure you load in the __dplyr__ package and the `movies` data set.
 
-```{r, message = FALSE, warning=FALSE}
-library(dplyr)
+```{r, message = FALSE, warning=FALSE, echo = TRUE}
+library("dplyr")
 data("movies", package = "jrIntroduction")
 ```
 
@@ -22,7 +22,7 @@ data("movies", package = "jrIntroduction")
       group_by(year, comedy)
     ```
 
-(1) Use `summarise()` to calculate the average budget in each year for both comedy and non comedy films.
+(1) Use the `summarise()` function  to calculate the average budget in each year for both comedy and non comedy films.
 
     ```{r}
     movies %>% 
@@ -39,7 +39,7 @@ Run the folowing R code:
 data(USnames, package = "jrIntroduction")
 ```
 
-The data frame `USnames` is a collection of names given to babies born in the US between 2011 and 2014. 
+\noindent The tibble `USnames` is a collection of names given to babies born in the US between 2011 and 2014. 
 
 (1) Make sure you are comfortable with what the data looks like using `head()` and `colnames()`.
 
@@ -48,14 +48,13 @@ The data frame `USnames` is a collection of names given to babies born in the US
     colnames(USnames)
     ```
 
-
 (1) How many children were born in 2012? Hint: use `filter()` then `summarise()`
 
     ```{r}
     filter(USnames, Year == 2012) %>%  summarise(sum(Count))
     ```
 
-(1) Were more male or females children born during the 4 years? Hint: use `group_by()`
+(1) Were more male or females children born during the four years? Hint: use `group_by()`
 
     ```{r}
     USnames %>%
@@ -64,10 +63,13 @@ The data frame `USnames` is a collection of names given to babies born in the US
     ## more males
     ```
 
-(1) Tricky: How many names in 2011 were used less than 10 times?
+(1) Tricky: How many names in 2011 were used fewer than ten times?
 
     ```{r}
     USnames %>% 
-      filter(Year == 2011 & Count < 10) %>% 
+      filter(Year == 2011) %>%
+      group_by(Name) %>%
+      summarise(Count = sum(Count)) %>%
+      filter(Count < 10) %>% 
       count()
     ```
