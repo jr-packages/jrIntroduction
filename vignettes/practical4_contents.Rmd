@@ -64,7 +64,7 @@ The data frame `USnames` is a collection of names given to babies born in the US
     ## more males
     ```
 
-(1) Tricky: How many names in 2011 were used less than 10 times?
+(1) Tricky: How many names in 2011 were used less than 10 times? Hint: names can be used for both male and female.
 
     ```{r}
     USnames %>% 
