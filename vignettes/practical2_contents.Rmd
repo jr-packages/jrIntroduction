@@ -1,21 +1,15 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 ## A suggestion
 
 This is just a suggestion to try and help get you into "good habits" early. If I was sitting to take this practical now, I would start a new R script file. That way all of the work that you have done associated with today's course is in one place, and the code for each of the practicals is separate from one another. This might feel a bit tedious right now, but as the amount of code you write and number of projects you take part in increases it will pay off to have a structured workflow. 
 
-
 # Tibbles 
 
-For this set of questions we will use the movies data from the IMDB database. However, to give you some practice at reading in your own data, we're going to get you to read it in. 
-
-```{r, eval = FALSE, echo = TRUE}
-library("jrIntroduction")
-GetCSVMovies()
-```
-
-This will load a file called `movies.csv` into your current working directory. Use **readr** and `read_csv()` to read this file in. If the `GetCSVMovies()` function doesn't work for you, then just use the `data()` command from the notes as it is the same data.
-```{r, eval = FALSE}
-movies = read_csv("movies.csv")
-```
+For this set of questions we will use the movies data from the IMDB database. 
 ```{r, echo = FALSE, message = FALSE}
 data(movies, package = "jrIntroduction")
 ```
@@ -59,6 +53,28 @@ data(movies, package = "jrIntroduction")
     ```{r, eval = FALSE}
     # Counting up the categories within a vector
     ```
+
+
+## Loading data from a CSV file
+
+To give you some practice at reading in your own data, we're going to get you to read it in. 
+The function
+
+```{r, eval = FALSE, echo = TRUE}
+library("jrIntroduction")
+get_csv_movies_file()
+```
+
+\noindent will copy a file called `movies.csv` into your current working directory. You can now
+import the data set using the _Import Dataset_ button in RStudio, under the 
+Environment tab
+
+```{r echo =FALSE, results = "markup", out.width='0.6\\textwidth'}
+fname = system.file("import_data.png", package = "jrIntroduction")
+knitr::include_graphics(fname)
+```
+
+\noindent This will generate R code that you can reuse.
 
 # Solutions
 
