@@ -1,4 +1,4 @@
-# ggplot2
+# The ggplot2 Package
 
 We will continue to investigate the movies data from earlier. Make sure that you have the data loaded into the session as part of your new script (if you started one) and the package loaded.
 
@@ -9,14 +9,14 @@ data(movies, package = "jrIntroduction")
 
 ## Scatter plots
 
-(1) Make a basic scatter plot with votes on the x axis and rating on the y axis. Remember, we use the `ggplot()` function to create a basic plot and them `geom_point()` to add points.
+1. Make a basic scatter plot with votes on the x-axis and rating on the y-axis. Remember, we use the `ggplot()` function to create a basic plot and them `geom_point()` to add points.
 
 ```{r, eval = FALSE}
 g = ggplot(movies, aes(x = votes, y = rating)) +
     geom_point()
 ```
 
-(1) Use the `labs()` function to change the axis labels & and title to something better
+2. Use the `labs()` function to change the axis labels & and title to something better
 
     ```{r, eval = FALSE}
     g + labs(x = "No of Votes", 
@@ -24,7 +24,7 @@ g = ggplot(movies, aes(x = votes, y = rating)) +
              title = "No of Votes vs Average IMDB Rating")
     ```
 
-(1) The range of possible ratings is between 0 and 10, however because the maximum rating is below 10 the y-axis stops before 10. We can change the axis range using the `ylim` function. For instance, if our graph was stored in an object `g`, we could change the y-axis limit to (0,10) by adding `ylim(0, 10)`. Make this change to your graph.
+3. The range of possible ratings is between 0 and 10, however because the maximum rating is below 10 the y-axis stops before 10. We can change the axis range using the `ylim()` function. For instance, if our graph was stored in an object `g`, we could change the y-axis limit to (0, 10) by adding `ylim(0, 10)`. Make this change to your graph.
 
     ```{r, eval = FALSE}
     g + ylim(0, 10)
@@ -32,14 +32,14 @@ g = ggplot(movies, aes(x = votes, y = rating)) +
 
 ## Histograms
 
-(1) Make a basic histogram of the year of releases. 
+1. Make a basic histogram of the year of releases. 
 
     ```{r, eval = FALSE}
     ggplot(movies, aes(x = year)) +
         geom_histogram()
     ```
     
-(1) Change the binwidth to 1 year using the `binwidth` argument in `geom_histogram(binwidth = 1)`. Try different values of `binwidth`.
+2. Change the binwidth to 1 year using the `binwidth` argument in `geom_histogram(binwidth = 1)`. Try different values of `binwidth`.
 
     ```{r, eval = FALSE}
     ggplot(movies, aes(x = year)) + 
@@ -54,20 +54,20 @@ ggplot(movies, aes(x = classification)) +
   geom_bar()
 ```
     
-(1) Inside the `geom_bar()` function, try adding the argument `colour = "blue"`. What happens?
+1. Inside the `geom_bar()` function, try adding the argument `colour = "blue"`. What happens?
     ```{r, eval = FALSE}
     ggplot(movies, aes(x = classification)) +
         geom_bar(colour = "blue")
     ```
     
-(1) Change `colour = "blue"` to `fill = "blue"`
+2. Change `colour = "blue"` to `fill = "blue"`?
 
-(1) Experiment with other colours, you can find a list of colours that R takes using the `colours()` function i.e. run 
-    ```{r, eval = FALSE}
+3. Experiment with other colours, you can find a list of colours that R takes using the `colours()` function i.e. run 
+    ```{r, eval = TRUE, results = "hide"}
     colours()
     ```
 
-(1) Remove `fill = "blue"` from `geom_bar()`. Now try adding `fill = classification` to the `aes()` function. What happens?
+4. Remove `fill = "blue"` from `geom_bar()`. Now try adding `fill = classification` to the `aes()` function. What happens?
     
     ```{r, eval = FALSE}
     ggplot(movies, aes(x = classification, fill = classification)) +
@@ -75,3 +75,12 @@ ggplot(movies, aes(x = classification)) +
     ```
     
 Again, **ggplot2** is a huge package and so we can only cover the basics today. This is just a general intro into some of the main concepts.
+
+# Solutions
+
+Solutions to the practical questions are contained within the package
+
+```{r, eval= FALSE, echo = TRUE}
+vignette("solutions3", package = "jrIntroduction")
+```
+

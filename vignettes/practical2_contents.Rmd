@@ -54,7 +54,6 @@ data(movies, package = "jrIntroduction")
     # Counting up the categories within a vector
     ```
 
-
 ## Loading data from a CSV file
 
 To give you some practice at reading in your own data, we're going to get you to read it in. 
