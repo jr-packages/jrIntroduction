@@ -7,3 +7,4 @@ combine:
 
 clean:
 	rm practical?.pdf introduction_practicals.pdf
+
