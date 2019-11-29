@@ -7,14 +7,14 @@ library("dplyr")
 data("movies", package = "jrIntroduction")
 ```
 
-(1) We want to look at how film budgets for films in English have changed over time for both the Comedy and non Comedy films. To start with, we should filter the data set such that it only contains films spoken in English. Try using the `%>%` notation, i.e. `movies %>% filter(...)`
+1. We want to look at how film budgets for films in English have changed over time for both the Comedy and non Comedy films. To start with, we should filter the data set such that it only contains films spoken in English. Try using the `%>%` notation, i.e. `movies %>% filter(...)`
 
     ```{r, eval = FALSE}
     movies %>%
       filter(language == "English")
     ```
 
-(1) We want to look at comedy and non comedy films in each year, this is some sort of grouping structure which suggests use of the `group_by()` function. Create this grouping structure on the filtered movies data
+2. We want to look at comedy and non comedy films in each year, this is some sort of grouping structure which suggests use of the `group_by()` function. Create this grouping structure on the filtered movies data
 
     ```{r, eval = FALSE}
     movies %>% 
@@ -22,7 +22,7 @@ data("movies", package = "jrIntroduction")
       group_by(year, comedy)
     ```
 
-(1) Use the `summarise()` function  to calculate the average budget in each year for both comedy and non comedy films.
+3. Use the `summarise()` function  to calculate the average budget in each year for both comedy and non comedy films.
 
     ```{r}
     movies %>% 
@@ -41,20 +41,20 @@ data(USnames, package = "jrIntroduction")
 
 \noindent The tibble `USnames` is a collection of names given to babies born in the US between 2011 and 2014. 
 
-(1) Make sure you are comfortable with what the data looks like using `head()` and `colnames()`.
+1. Make sure you are comfortable with what the data looks like using `head()` and `colnames()`.
 
     ```{r}
     head(USnames)
     colnames(USnames)
     ```
 
-(1) How many children were born in 2012? Hint: use `filter()` then `summarise()`
+2. How many children were born in 2012? Hint: use `filter()` then `summarise()`
 
     ```{r}
     filter(USnames, Year == 2012) %>%  summarise(sum(Count))
     ```
 
-(1) Were more male or females children born during the four years? Hint: use `group_by()`
+3. Were more male or females children born during the four years? Hint: use `group_by()`
 
     ```{r}
     USnames %>%
@@ -63,7 +63,7 @@ data(USnames, package = "jrIntroduction")
     ## more males
     ```
 
-(1) Tricky: How many names in 2011 were used less than 10 times? Hint: names can be used for both male and female.
+4. Tricky: How many names in 2011 were used less than 10 times? Hint: names can be used for both male and female.
 
     ```{r}
     USnames %>% 
@@ -73,3 +73,14 @@ data(USnames, package = "jrIntroduction")
       filter(Count < 10) %>% 
       count()
     ```
+
+
+# Solutions
+
+Solutions to the practical questions are contained within the package
+
+```{r, eval= FALSE, echo = TRUE}
+vignette("solutions4", package = "jrIntroduction")
+```
+
+

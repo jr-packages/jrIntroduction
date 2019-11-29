@@ -20,9 +20,3 @@ knitr::opts_chunk$set(results = "hide", echo = FALSE, cache = FALSE)
 
 ```{r child = 'practical3_contents.Rmd'}
 ```
-
-## Solutions
-
-```{r, eval= FALSE, echo = TRUE}
-vignette("solutions3", package = "jrIntroduction")
-```
