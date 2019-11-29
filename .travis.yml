@@ -12,18 +12,12 @@ env:
   global:
     - ALLOWED_NOTES=1
 
-r_packages:
-  - drat
-
-r_github_packages:
-  - jumpingrivers/inteRgrate
-
 before_install:
   - sudo apt-get install -y ghostscript
 
 before_script:
   - wget https://raw.githubusercontent.com/jr-packages/drat/master/test_deploy.sh
-  - bash test_deploy.sh
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash test_deploy.sh
 
 script:
   - Rscript -e "source('https://raw.githubusercontent.com/jr-packages/drat/master/script.R')"
