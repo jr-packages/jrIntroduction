@@ -18,7 +18,7 @@ before_install:
 stages:
   - name: before_script
     # require the branch name to be master (note for PRs this is the base branch name)
-    if: branch = master AND fork = false
+    if: branch = master AND fork = false AND type = push
 
 before_script:
   - wget https://raw.githubusercontent.com/jr-packages/drat/master/test_deploy.sh
