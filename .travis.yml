@@ -12,12 +12,6 @@ env:
   global:
     - ALLOWED_NOTES=1
 
-r_packages:
-  - drat
-
-r_github_packages:
-  - jumpingrivers/inteRgrate
-
 before_install:
   - sudo apt-get install -y ghostscript
 
