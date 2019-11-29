@@ -18,7 +18,7 @@ before_install:
 before_script:
   - wget https://raw.githubusercontent.com/jr-packages/drat/master/test_deploy.sh
   - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash test_deploy.sh
-
+  - echo $TRAVIS_PULL_REQUEST && echo $TRAVIS_BRANCH
 script:
   - Rscript -e "source('https://raw.githubusercontent.com/jr-packages/drat/master/script.R')"
 
