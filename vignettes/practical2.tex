@@ -1,0 +1,202 @@
+\documentclass[]{tufte-handout}
+
+% ams
+\usepackage{amssymb,amsmath}
+
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \makeatletter
+  \@ifpackageloaded{fontspec}{}{\usepackage{fontspec}}
+  \makeatother
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \makeatletter
+  \@ifpackageloaded{soul}{
+     \renewcommand\allcapsspacing[1]{{\addfontfeature{LetterSpace=15}#1}}
+     \renewcommand\smallcapsspacing[1]{{\addfontfeature{LetterSpace=10}#1}}
+   }{}
+  \makeatother
+
+\fi
+
+% graphix
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+
+% booktabs
+\usepackage{booktabs}
+
+% url
+\usepackage{url}
+
+% hyperref
+\usepackage{hyperref}
+
+% units.
+\usepackage{units}
+
+
+\setcounter{secnumdepth}{-1}
+
+% citations
+
+% pandoc syntax highlighting
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+
+% longtable
+
+% multiplecol
+\usepackage{multicol}
+
+% strikeout
+\usepackage[normalem]{ulem}
+
+% morefloats
+\usepackage{morefloats}
+
+
+% tightlist macro required by pandoc >= 1.14
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% title / author / date
+\title{Practical 2}
+\author{Jumping Rivers}
+\date{}
+
+
+\begin{document}
+
+\maketitle
+
+
+
+
+\hypertarget{a-suggestion}{%
+\subsection{A suggestion}\label{a-suggestion}}
+
+This is just a suggestion to try and help get you into ``good habits''
+early. If I was sitting to take this practical now, I would start a new
+R script file. That way all of the work that you have done associated
+with today's course is in one place, and the code for each of the
+practicals is separate from one another. This might feel a bit tedious
+right now, but as the amount of code you write and number of projects
+you take part in increases it will pay off to have a structured
+workflow.
+
+\hypertarget{tibbles}{%
+\section{Tibbles}\label{tibbles}}
+
+For this set of questions we will use the movies data from the IMDB
+database.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Use the \texttt{head()} function to inspect the top of the data, this
+  can help give you a feel for what the data looks like and what
+  variables are contained within the data
+\item
+  How many films and how many variables are in this data set?
+\item
+  Recall that if I want to pull out a single column, or variable, from a
+  data frame we can use \texttt{\$}. To extract the titles from this
+  data set we write \texttt{movies\$title}.\footnote{If you can't
+    remember what the names of the columns are, you can use
+    \texttt{colnames(movies)} to find out.} Using \texttt{mean()} and
+  \texttt{median()} calculate these summary statistics for the film
+  lengths
+\item
+  What year is the oldest film in the data set from?
+\item
+  How long is the longest film?
+\item
+  What is the standard deviation of the film ratings?
+\item
+  Try running the following code
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(movies}\OperatorTok{$}\NormalTok{action)}
+\end{Highlighting}
+\end{Shaded}
+
+  What do you think is happening?
+\end{enumerate}
+
+\hypertarget{loading-data-from-a-csv-file}{%
+\subsection{Loading data from a CSV
+file}\label{loading-data-from-a-csv-file}}
+
+To give you some practice at reading in your own data, we're going to
+get you to read it in. The function
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"jrIntroduction"}\NormalTok{)}
+\KeywordTok{get_csv_movies_file}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\noindent will copy a file called \texttt{movies.csv} into your current
+working directory. You can now import the data set using the
+\emph{Import Dataset} button in RStudio, under the Environment tab
+
+\includegraphics[width=0.6\textwidth]{/home/john/R/x86_64-pc-linux-gnu-library/3.6/jrIntroduction/import_data}
+
+\noindent This will generate R code that you can reuse.
+
+\hypertarget{solutions}{%
+\section{Solutions}\label{solutions}}
+
+Solutions to the practical questions are contained within the package
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{vignette}\NormalTok{(}\StringTok{"solutions2"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"jrIntroduction"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+
+
+\end{document}

@@ -1,0 +1,237 @@
+\documentclass[]{tufte-handout}
+
+% ams
+\usepackage{amssymb,amsmath}
+
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \makeatletter
+  \@ifpackageloaded{fontspec}{}{\usepackage{fontspec}}
+  \makeatother
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \makeatletter
+  \@ifpackageloaded{soul}{
+     \renewcommand\allcapsspacing[1]{{\addfontfeature{LetterSpace=15}#1}}
+     \renewcommand\smallcapsspacing[1]{{\addfontfeature{LetterSpace=10}#1}}
+   }{}
+  \makeatother
+
+\fi
+
+% graphix
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+
+% booktabs
+\usepackage{booktabs}
+
+% url
+\usepackage{url}
+
+% hyperref
+\usepackage{hyperref}
+
+% units.
+\usepackage{units}
+
+
+\setcounter{secnumdepth}{-1}
+
+% citations
+
+% pandoc syntax highlighting
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+
+% longtable
+
+% multiplecol
+\usepackage{multicol}
+
+% strikeout
+\usepackage[normalem]{ulem}
+
+% morefloats
+\usepackage{morefloats}
+
+
+% tightlist macro required by pandoc >= 1.14
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% title / author / date
+\title{Practical 1}
+\author{Jumping Rivers}
+\date{}
+
+
+\begin{document}
+
+\maketitle
+
+
+
+
+\hypertarget{getting-started}{%
+\section{Getting Started}\label{getting-started}}
+
+\hypertarget{start-a-new-script-file}{%
+\subsection{Start a new script file}\label{start-a-new-script-file}}
+
+If a new empty R script file does not open automatically when you launch
+RStudio you can open a new one\footnote{Alternatively use
+  \texttt{Ctrl\ +\ shift\ +\ n} to launch a new R script}
+
+\begin{verbatim}
+   File -> New File -> Rscript
+\end{verbatim}
+
+\noindent Make sure that you choose the correct type of file. The
+RStudio IDE is clever in the way that it treats file extensions.
+Choosing a R script file will make sure that when you come to save your
+script it is saved as the correct type. It is also necessary to allow us
+to easily send R code from the text editor to be evaluated in the R
+terminal.
+
+\hypertarget{sending-your-first-code}{%
+\subsection{Sending your first code}\label{sending-your-first-code}}
+
+Let's start with sending our first piece of code to be evaluated. In the
+script editor (likely the top left window) write a simple piece of code,
+say
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x =}\StringTok{ }\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\noindent To send this code from the editor to be run by R you have a
+few options:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  If the cursor is on the same line as the code you can either\footnote{Both
+    of these will only run the one line of code.}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Click \texttt{Run} at the top left of the editor window
+  \item
+    Press \texttt{Ctrl\ +\ enter}
+  \end{itemize}
+\item
+  Highlight the code that you would like to run and follow the options
+  in step 1 above.
+\item
+  \texttt{Ctrl\ +\ Shift\ +\ s} sends all code from the editor to be
+  evaluated.
+\end{enumerate}
+
+\marginnote{I tend to prefer using 'Ctrl + Enter' as I like using keyboard shortcuts. If you want to see all available keyboard shortcuts either go to Help and choose keyboard shortcuts, alternatively 'Alt + Shift + k' is the keyboard shortcut for the keyboard shortcut menu.}
+
+\hypertarget{course-r-package}{%
+\section{Course R package}\label{course-r-package}}
+
+Make sure that you have the course package loaded into the current
+session. Instructions on how to install the package are contained in the
+appendix to the course notes. You should only need to install a package
+once using \texttt{install.packages()} and then we need to use
+\texttt{library()} in every session or script that we want to use the
+functionality of that package.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"jrIntroduction"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{vectors}{%
+\section{Vectors}\label{vectors}}
+
+Write the following code in the editor and run it
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x1 =}\StringTok{ }\KeywordTok{GetNumericVector}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\noindent This code generates a large vector of random numbers such that
+everyone has the same.\footnote{This function is part of the course
+  package \textbf{jrIntroduction}, you can view it's help page if you
+  like \texttt{r\ ?GetNumericVector()}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  What is the length of \texttt{x1}?
+\item
+  What is the 55\textsuperscript{th} element of \texttt{x1}?
+\item
+  What is the final value in \texttt{x1}?
+\item
+  What is the 50\textsuperscript{th} smallest value of \texttt{x1}?
+\item
+  How many unique values are there in \texttt{x1}?
+\item
+  What is the total of all elements?
+\end{enumerate}
+
+\hypertarget{solutions}{%
+\section{Solutions}\label{solutions}}
+
+Solutions to the practical questions are contained within the package
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{vignette}\NormalTok{(}\StringTok{"solutions1"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"jrIntroduction"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+
+
+\end{document}
