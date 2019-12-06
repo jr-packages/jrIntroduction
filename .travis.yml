@@ -1,6 +1,11 @@
 language: r
 cache: packages
 
+env:
+  global:
+    - ALLOWED_NOTES=1
+    - NO_IMPORTS=5
+
 notifications:
   email:
     recipients:
@@ -8,29 +13,17 @@ notifications:
     on_success: change
     on_failure: change
 
-env:
-  global:
-    - ALLOWED_NOTES=1
-
-r_packages:
-  - drat
-
-r_github_packages:
-  - jumpingrivers/inteRgrate
-
 before_install:
-  - sudo apt-get install -y ghostscript
+  - tlmgr install fancyvrb units
+  - sudo apt-get install libgit2-dev
 
 before_script:
   - wget https://raw.githubusercontent.com/jr-packages/drat/master/test_deploy.sh
-  - bash test_deploy.sh
+  - if [ ${TRAVIS_PULL_REQUEST} = "false" ] && [ $TRAVIS_BRANCH = "master" ]; then bash test_deploy.sh; fi
+  - rm test_deploy.sh
 
 script:
-  - Rscript -e "inteRgrate::check_pkg()"
-  - Rscript -e "inteRgrate::check_r_filenames()"
-  - Rscript -e "inteRgrate::check_tidy_description()"
-  - Rscript -e "inteRgrate::check_lintr()"
-  - Rscript -e "inteRgrate::check_namespace()"
+  - Rscript -e "source('https://raw.githubusercontent.com/jr-packages/drat/master/script.R')"
 
 after_success:
   - wget https://raw.githubusercontent.com/jr-packages/drat/master/deploy.sh
