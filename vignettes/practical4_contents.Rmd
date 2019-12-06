@@ -63,7 +63,7 @@ data(USnames, package = "jrIntroduction")
     ## more males
     ```
 
-4. Tricky: How many names in 2011 were used fewer than ten times?
+4. Tricky: How many names in 2011 were used less than 10 times? Hint: names can be used for both male and female.
 
     ```{r}
     USnames %>% 

@@ -15,6 +15,7 @@ notifications:
 
 before_install:
   - tlmgr install fancyvrb units
+  - sudo apt-get install libgit2-dev
 
 before_script:
   - wget https://raw.githubusercontent.com/jr-packages/drat/master/test_deploy.sh
@@ -23,7 +24,6 @@ before_script:
 
 script:
   - Rscript -e "source('https://raw.githubusercontent.com/jr-packages/drat/master/script.R')"
-
 
 after_success:
   - wget https://raw.githubusercontent.com/jr-packages/drat/master/deploy.sh
