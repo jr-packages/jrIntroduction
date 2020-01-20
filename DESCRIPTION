@@ -22,6 +22,7 @@ Imports:
 Suggests:
     formatR,
     gridExtra,
+    gtrendsR,
     hrbrthemes,
     knitr,
     lintr,
@@ -29,8 +30,7 @@ Suggests:
     rmarkdown,
     testthat,
     tidyr,
-    tufte,
-    gtrendsR
+    tufte
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
