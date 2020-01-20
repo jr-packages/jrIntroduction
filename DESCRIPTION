@@ -18,7 +18,8 @@ Imports:
     ggplot2,
     ggplot2movies,
     readr,
-    readxl
+    readxl,
+    gtrendsR
 Suggests:
     formatR,
     gridExtra,
