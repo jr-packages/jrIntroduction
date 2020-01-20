@@ -18,8 +18,7 @@ Imports:
     ggplot2,
     ggplot2movies,
     readr,
-    readxl,
-    gtrendsR
+    readxl
 Suggests:
     formatR,
     gridExtra,
@@ -30,7 +29,8 @@ Suggests:
     rmarkdown,
     testthat,
     tidyr,
-    tufte
+    tufte,
+    gtrendsR
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
