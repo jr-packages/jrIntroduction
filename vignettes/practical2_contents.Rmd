@@ -9,8 +9,9 @@ This is just a suggestion to try and help get you into "good habits" early. If I
 
 # Tibbles 
 
-For this set of questions we will use the movies data from the IMDB database. 
-```{r, echo = FALSE, message = FALSE}
+For this set of questions we will use the movies data from the IMDB database. Run the line of code below to load the data set into your R session.
+
+```{r, echo = TRUE, message = FALSE}
 data(movies, package = "jrIntroduction")
 ```
 
