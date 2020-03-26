@@ -41,3 +41,6 @@ vignettes/*.log
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 rsconnect/
 
+.Ruserdata
+.Renviron
+.DS_Store
