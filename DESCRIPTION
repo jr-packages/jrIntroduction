@@ -1,7 +1,7 @@
 Type: Package
 Package: jrIntroduction
 Title: Jumping Rivers: Introduction to R
-Version: 1.0.11
+Version: 1.0.12
 Authors@R: 
     person(given = "Jumping",
            family = "Rivers",
@@ -17,12 +17,12 @@ Imports:
     dplyr (>= 0.7.0),
     ggplot2,
     ggplot2movies,
+    gtrendsR,
     readr,
     readxl
 Suggests:
     formatR,
     gridExtra,
-    gtrendsR,
     hrbrthemes,
     knitr,
     lintr,
